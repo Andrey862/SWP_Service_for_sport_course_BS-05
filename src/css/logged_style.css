@@ -1,0 +1,115 @@
+body{
+	margin: 0;
+	padding: 0;
+}
+
+*{
+	padding: 0;
+	margin: 0;
+	text-decoration: none;
+	list-style: none;
+	box-sizing: border-box;
+}
+
+.navi{
+	font-family: 'padding', sans-serif;
+}
+
+nav{
+	background: #83aa6b;
+	height: 80px;
+	width: 100%;
+}
+
+label.logo{
+	color: white;
+	font-size: 35px;
+	line-height: 80px;
+	padding: 0 100px;
+	font-weight: bold;
+}
+
+nav ul{
+	float: right;
+	margin-right: 20px;
+}
+
+nav ul li{
+	display: inline-block;
+	line-height: 80px;
+	margin: 0 10px;
+}
+
+nav ul li a{
+	color: white;
+	font-size: 17px;
+	padding: 7px 13px;
+	border-radius: 10px;
+	text-transform: uppercase;
+}
+
+.wave{
+	opacity: 0.2;
+	position: fixed;
+	height: 110%;
+	left: -60;
+	bottom: -65;
+	z-index: -1;
+}
+
+
+a.active, a:hover{
+	background: #83aa6b;
+	transition: .3s;
+}
+
+.container1{
+	text-align: center;
+	margin-top: 175px;
+}
+
+.container2{
+	text-align: center;
+	margin-top: 10px
+}
+
+.btn{
+	outline: none;
+	border: none;
+	border-radius: 25px;
+
+	width: 400px;
+	height: 200px;
+
+	background: none;
+	padding: 0px;
+	font-size: 30px;
+	cursor: pointer;
+
+	background-image: linear-gradient(to right, #83aa6b,  #83aa6b, #d8ffbd);
+
+	margin: 10px;
+	transition: 0.3s;
+	position: relative;
+
+	color: #fff;
+	text-transform: uppercase;
+	font-family: 'Poppins', sans-serif;
+	background-size: 200%;
+}
+
+.btn:hover{
+	background-position: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
