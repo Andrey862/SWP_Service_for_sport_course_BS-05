@@ -2,27 +2,46 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	list-style: none;
 }
 
 body{
 	font-family: 'Poppins', sans-serif;
 }
 
+.navi{
+	font-family: 'padding', sans-serif;
+}
+
+nav{
+	background: #83aa6b;
+	height: 80px;
+	width: 100%;
+}
+
+label.logo{
+	color: white;
+	font-size: 35px;
+	line-height: 80px;
+	padding: 0 100px;
+	font-weight: bold;
+}
+
 .wave{
 	opacity: 0.2;
 	position: fixed;
-	height: 110%;
+	height: 100%;
 	left: -60;
 	bottom: -65;
 	z-index: -1;
 }
 
 .container{
-	width: 100vw;
-	height: 100vh;
+	width: 100%;
+	height: 90%;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	grid-gap: 7rem;
+	grid-gap: 10rem;
 	padding: 0 2rem;
 }
 
@@ -73,7 +92,7 @@ form h2{
 	bottom: -2px;
 	width: 0%;
 	height: 2px;
-	background-color: #38d39f;
+	background-color: #83aa6b;
 	transition: .3s;
 }
 
@@ -86,7 +105,7 @@ form h2{
 }
 
 .input-div.focus .i i{
-	color: #38d39f;
+	color: #83aa6b;
 }
 
 .input-div.focus div h5{
@@ -157,7 +176,7 @@ a{
 }
 
 a:hover{
-	color: #38d39f;
+	color: #83aa6b;
 }
 
 .btn{
@@ -170,7 +189,7 @@ a:hover{
 	font-size: 1.2rem;
 	outline: none;
 	border: none;
-	background-image: linear-gradient(to right, #32be8f,  #38d39f, #32be8f);
+	background-image: linear-gradient(to right, #83aa6b,  #83aa6b, #d8ffbd);
 	cursor: pointer;
 	color: #fff;
 	text-transform: uppercase;
