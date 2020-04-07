@@ -41,3 +41,7 @@ document.getElementById('login_btn').onclick = function validation() {
 		document.getElementById('notice').innerHTML = "Wrong username or/and password";
 	}
 }
+
+document.getElementById('my_statistics').onclick = function validation() {
+    window.location.href = 'student.statistics.html';
+}
