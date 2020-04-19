@@ -1,0 +1,135 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+*{
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+.navi{
+    font-family: 'padding', sans-serif;
+}
+
+nav{
+    background: #83aa6b;
+    height: 80px;
+    width: 100%;
+}
+
+label.logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+}
+
+nav ul{
+    float: right;
+    margin-right: 20px;
+}
+
+nav ul li{
+    display: inline-block;
+    line-height: 80px;
+    margin: 0 10px;
+}
+
+nav ul li a{
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 10px;
+    text-transform: uppercase;
+}
+
+.wave{
+    opacity: 0.2;
+    position: fixed;
+    height: 110%;
+    left: -60;
+    bottom: -65;
+    z-index: -1;
+}
+
+.card{
+    outline: none;
+    
+	border: 1px dotted #83aa6b;
+
+    width: 650px;
+    height: 75px;
+
+    background: none;
+    padding: 0px;
+    font-size: 16px;
+
+    background-image: linear-gradient(to right, #fff,  #83aa6b);
+
+    margin: 10px;
+    transition: 0.3s;
+    position: relative;
+	
+
+    color: #000;
+    font-family: 'Poppins', sans-serif;
+    background-size: 200%;
+
+}
+
+.btn{
+	padding: 7px 13px;
+    color: #000;
+	background-color: white;
+	
+    cursor: pointer;
+
+	position:absolute; 
+}
+
+.btn:hover{
+	background-color: #83aa6b;
+}
+
+.container1{
+	float:left;
+	margin-left:3%;
+	margin-top:1%;
+}
+
+.container2{
+	margin-top:3%;
+	margin-left:85%;
+}
+
+.btn_view{
+	padding: 15px 30px;
+    color: black;
+	background-color: #83aa6b;
+	font-size: 20px;
+	
+    cursor: pointer;
+
+	position:absolute;
+	font-weight: bold;
+	margin-left:20%;
+	margin-top: 8%
+	
+}
+
+.list{
+	float:left;
+	margin-left:27%;
+}
+
+
+
+
+
+
+
