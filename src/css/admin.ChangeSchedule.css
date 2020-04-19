@@ -99,13 +99,20 @@ nav ul li a {
 .container1 {
     float: left;
     margin-left: 3%;
-    margin-top: 1%;
 }
+
+.container3 {
+    margin-top: 3%;
+    margin-left: 55%;
+}
+
 
 .container2 {
     margin-top: 3%;
     margin-left: 85%;
 }
+
+
 
 .btn_view {
     padding: 15px 30px;
@@ -125,6 +132,11 @@ nav ul li a {
 .list {
     float: left;
     margin-left: 27%;
+}
+
+.list2 {
+    display: contents;
+    justify-content: space-evenly;
 }
 
 .fixed-nav-bar {
