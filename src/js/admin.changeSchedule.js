@@ -14,12 +14,9 @@ function Course(props) {
 
 
             <div className="container3">
-                <div className="i">
-                    <i className="fas fa-user"></i>
-                </div>
                 <div>
                     <h3>New Schedule</h3>
-                    <input className="input" type="text" id="schedule"/>
+                    <input className="input" type="text" id={"schedule" + props.course.id}/>
                 </div>
             </div>
         </div>
@@ -28,23 +25,7 @@ function Course(props) {
 
 class App extends React.Component {
 
-    state = {
-        courses: [
-            {id: '1', name: 'Sambo', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '2', name: 'Functional training', trainer: 'Eduard Shaimardanov', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '3', name: 'Stretching', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '4', name: 'Stretching', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '5', name: 'Stretching', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '6', name: 'Swimming2', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '7', name: 'Swimming3', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '8', name: 'Swimming4', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '9', name: 'Swimming5', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '10', name: 'Swimming6', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '11', name: 'Swimming7', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '12', name: 'Swimming8', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'},
-            {id: '13', name: 'Swimming9', trainer: 'Pavlova Alina', schedule: 'Пн., Вт., Ср. в 17:00'}
-        ]
-    }
+    state = getAllCourses()
 
     render() {
         return (
@@ -58,28 +39,105 @@ class App extends React.Component {
                 </div>
 
             </div>
-
-
         )
     }
-
-
 }
 
-//function return all ids (will be integrated with backend)
-function getAllIds() {
-    return ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13']
+
+function getAllCourses() {
+    var courses = []
+
+    const url = "http://194.87.102.88/api/groups/";
+
+    // Create a request variable and assign a new XMLHttpRequest object to it.
+    const request = new XMLHttpRequest()
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', url, false)
+
+    // Send request
+    request.send()
+
+    JSON.parse(request.responseText).forEach(course => {
+            courses.push({
+                id: course["id"],
+                name: course["name"],
+                trainer: course["trainer"]["first_name"],
+                schedule: course["schedule"]
+            })
+        }
+    )
+
+    return {courses: courses}
 }
+
+//function add event handler on buttons clicks
+function addEventHandler() {
+    const url = "http://194.87.102.88/api/groups/";
+
+    // Create a request variable and assign a new XMLHttpRequest object to it.
+    const request = new XMLHttpRequest()
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', url, true)
+
+    request.onload = function () {
+        var data = JSON.parse(this.response)
+
+        if (request.status >= 200 && request.status < 400) {
+            data.forEach(user => {
+                document.getElementById(user['id']).onclick = handleButtonClick
+            })
+        } else {
+            console.log('error')
+        }
+    }
+
+    // Send request
+    request.send()
+}
+
 
 //make post request to api to change schedule
-function changeSchedule() {
+function handleButtonClick() {
     const courseId = this.id
-    alert("You changed schedule!");
+    const newSchedule = document.getElementById("schedule" + courseId).value;
+
+    if (newSchedule) {
+        saveSchedule(newSchedule, courseId)
+    } else {
+        alert(`Empty schedule: please, fill the field`)
+    }
 }
+
+function saveSchedule(newSchedule, courseId) {
+    const url = `http://194.87.102.88/api/groups/${courseId}/`
+
+    const data = {
+        schedule: newSchedule
+    }
+
+    const json = JSON.stringify(data);
+
+    fetch(url, {
+        method: 'PATCH',
+        body: JSON.stringify(data),
+        headers:
+            {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+    })
+        .then(response => {
+            if (response.status >= 200 && response.status < 400) {
+                alert(`You successfully change schedule to: ${newSchedule}`)
+            } else {
+                alert("Server side error")
+            }
+        })
+}
+
 
 ReactDOM.render(<App/>, document.getElementById('root'))
 
 
-getAllIds().forEach(function (item) {
-    document.getElementById(item).onclick = changeSchedule;
-});
+addEventHandler()
