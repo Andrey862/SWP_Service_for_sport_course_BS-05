@@ -97,15 +97,37 @@ nav ul li a {
 }
 
 .container1 {
+    display: block;
+    margin-top: 2%;
+    height: 100%;
     float: left;
     margin-left: 3%;
-    margin-top: 1%;
 }
+
+/*display: block;
+    margin-top: 2%;
+    float: left;
+    margin-left: 3%;*/
+
+.container3 {
+    display: block;
+    height: 100%;
+    margin-top: 3%;
+    margin-left: 55%;
+}
+
+
+.input {
+    margin-top: 5px;
+}
+
+
 
 .container2 {
     margin-top: 3%;
     margin-left: 85%;
 }
+
 
 .btn_view {
     padding: 15px 30px;
@@ -127,9 +149,38 @@ nav ul li a {
     margin-left: 27%;
 }
 
+.list2 {
+    display: contents;
+    justify-content: space-evenly;
+}
+
 .fixed-nav-bar {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 9999;
+}
+
+a.active, a:hover {
+    background: #9bba88;
+    transition: .3s;
+}
+
+.input-div {
+    position: relative;
+    display: grid;
+    grid-template-columns: 7% 93%;
+    margin: 25px 0;
+    padding: 5px 0;
+    border-bottom: 2px solid #d9d9d9;
+}
+
+.input-div:after, .input-div:before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    width: 0%;
+    height: 2px;
+    background-color: #83aa6b;
+    transition: .3s;
 }
