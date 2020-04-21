@@ -17,23 +17,7 @@ function Course(props){
 
 class App extends React.Component {
 
-	state = {
-		courses: [
-			{id: '1', name: 'Swimming', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},	
-			{id: '2', name: 'Functional training', trainer:'Eduard Shaimardanov', schedule:'Пн., Вт., Ср. в 17:00'},	
-			{id: '3', name: 'Stretching', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '4', name: 'Stretching', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '5', name: 'Stretching', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '6', name: 'Swimming2', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '7', name: 'Swimming3', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '8', name: 'Swimming4', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '9', name: 'Swimming5', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '10', name: 'Swimming6', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '11', name: 'Swimming7', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '12', name: 'Swimming8', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			{id: '13', name: 'Swimming9', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'}
-		]	
-	}
+	state = getAllCourses()
 
 	render(){
 		return (
@@ -53,6 +37,33 @@ class App extends React.Component {
 	}
 
 
+}
+
+function getAllCourses(){
+	var courses = []
+
+	const url = "http://194.87.102.88/api/groups/";
+
+    // Create a request variable and assign a new XMLHttpRequest object to it.
+    const request = new XMLHttpRequest()
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', url, false)
+
+    // Send request
+    request.send()
+
+    JSON.parse(request.responseText).forEach(course => {
+            courses.push({
+                id: course["id"],
+                name: course["name"],
+                trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"] ,
+                schedule: course["schedule"]
+            })
+        }
+    )
+
+    return {courses: courses}
 }
 
 
