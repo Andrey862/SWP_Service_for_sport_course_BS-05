@@ -118,7 +118,7 @@ table.my_table {
     text-align: left;
 
     position: absolute;
-    top: 200px;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, 0px);
 }
