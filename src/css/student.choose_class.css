@@ -127,9 +127,4 @@ nav ul li a {
     margin-left: 27%;
 }
 
-.fixed-nav-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9999;
-}
+
