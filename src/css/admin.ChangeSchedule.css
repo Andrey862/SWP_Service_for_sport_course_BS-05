@@ -59,17 +59,17 @@ nav ul li a {
 
 .card {
     outline: none;
+	border-radius: 15px;
+    border: 1px solid #AAAAAA;
 
-    border: 1px dotted #83aa6b;
-
-    width: 650px;
-    height: 75px;
+    width: 500px;
+    height: 82px;
 
     background: none;
     padding: 0px;
     font-size: 16px;
 
-    background-image: linear-gradient(to right, #fff, #83aa6b);
+	background-image: linear-gradient(to right, white, #ccdbbd);
 
     margin: 10px;
     transition: 0.3s;
@@ -83,10 +83,14 @@ nav ul li a {
 }
 
 .btn {
-    padding: 7px 13px;
+	width: 80px;
+    height: 82px;
+	border-radius: 15px;
+    border: 1px solid #AAAAAA;
+    padding: 0;
     color: #000;
-    background-color: white;
-
+    background-color:#ccdbbd;
+	font-weight: bold;
     cursor: pointer;
 
     position: absolute;
@@ -112,8 +116,9 @@ nav ul li a {
 .container3 {
     display: block;
     height: 100%;
+
     margin-top: 3%;
-    margin-left: 55%;
+    margin-left: 45%;
 }
 
 
@@ -124,8 +129,7 @@ nav ul li a {
 
 
 .container2 {
-    margin-top: 3%;
-    margin-left: 85%;
+	margin-left: 103%;
 }
 
 
@@ -183,4 +187,30 @@ a.active, a:hover {
     height: 2px;
     background-color: #83aa6b;
     transition: .3s;
+}
+
+.title {
+    width: 600px;
+
+    border: 1px solid #AAAAAA;
+    border-radius: 15px;
+    padding: 16px 20px;
+
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #83aa6b;
+	margin-left: 27.5%;
+	margin-top: 3%;
+}
+
+.schedule {
+	margin-top: 5%;
+	color: black;
+
+}
+
+.name {
+	font-size: 20px;
 }

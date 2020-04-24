@@ -2,9 +2,9 @@ function Course(props){
 	return (
 		<div className="card">
 			<div className="container1">
-				<h3>{props.course.name}</h3>
+				<h3 className="name">{props.course.name}</h3>
 				<p>{props.course.trainer}</p>
-				<p>{props.course.schedule}</p>	
+				<p className="schedule">{props.course.schedule}</p>	
 			</div>
 
 			<div className="container2">
@@ -29,6 +29,11 @@ class App extends React.Component {
 	render(){
 		return (
 			<div className="app">
+
+				<div className="title">
+					<h2> My classes </h2>
+				</div>
+
 				<div className="list">
 					{ this.state.courses.map(course => {
 						return (
