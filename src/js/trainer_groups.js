@@ -16,13 +16,23 @@ function show_groups(){
                 // console.log( data[i]['name'] );
                 
                 var row = table.insertRow(table.rows.length);
-                var cell = row.insertCell(0).outerHTML = "<th class='group' colspan='2'>" + data[i]['name'] + "</th>";
+                var cell = row.insertCell(0).outerHTML = "<th class='group' colspan='4'>" + data[i]['name'] + "</th>";
 
 
                 arr_url.push(data[i]['url']);
             }
             show_students(arr_url);
         });
+
+    // add_hour();
+}
+
+String.prototype.format = function() {
+  a = this;
+  for (k in arguments) {
+    a = a.replace("{" + k + "}", arguments[k])
+  }
+  return a
 }
 
 async function show_students(arr_url){
@@ -42,11 +52,13 @@ async function do_fetch(urrl) {
     let std = data['students'];
     for(var j=0; j<std.length; j++){
         var full_name = std[j]['first_name'] + " " + std[j]['last_name'];
-        // console.log( full_name );
+        console.log( std[j] );
 
         var row1 = table.insertRow(table.rows.length - tmp);
         var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
-        var cell1 = row1.insertCell(1).outerHTML = "<td class='btn_add'>" + "Add 2 hours" + "</td>";
+        var cell1 = row1.insertCell(1).outerHTML = "<td type='button' class='btn_add' onclick='add_hour({0}, {1});'>".format('1', std[j]['id']) + "1 hours" + "</td>";
+        var cell1 = row1.insertCell(2).outerHTML = "<td type='button' class='btn_add' onclick='add_hour({0}, {1});'>".format('2', std[j]['id']) + "2 hours" + "</td>";
+        var cell1 = row1.insertCell(3).outerHTML = "<td type='button' class='btn_add' onclick='add_hour({0}, {1});'>".format('3', std[j]['id']) + "3 hours" + "</td>";
     }
 
     tmp--;
@@ -54,32 +66,41 @@ async function do_fetch(urrl) {
 }
 
 
+function add_hour(hh, id){
+    // console.log(hh);
+    // console.log(id);
+    // console.log('\n');
 
+    let xhr = new XMLHttpRequest();
+    let url = "http://194.87.102.88/api/hours/";
 
-// fetch(url)
-        //     .then(function(resp1) {
-        //         return resp1.json();
-        //     })
-        //     .then(function(data1) {
-        //         // console.log(url);
+    // open a connection 
+    xhr.open("POST", url, true); 
 
-        //         for(var j=0; j<data1['students'].length; j++){
-        //             var full_name = data1['students'][j]['first_name'] + " " + data1['students'][j]['last_name'];
-        //             // console.log( full_name );
+    // Set the request header i.e. which type of content you are sending 
+    xhr.setRequestHeader("Content-Type", "application/json");
 
-        //             var row1 = table.insertRow(table.rows.length - tmp);
-        //             var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
-        //             var cell1 = row1.insertCell(1).outerHTML = "<td class='btn_add'>" + "Add 2 hours" + "</td>";
-        //         }
-        //         tmp--;
-        //     });
+    xhr.onreadystatechange = function () { 
+        if (xhr.readyState === 4 && xhr.status === 200) { 
 
+            // Print received data from server 
+            result.innerHTML = this.responseText;
 
+        } 
+    };
 
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
 
+    today = String(yyyy + '-' + mm + '-' + dd);
 
-
-
+    var data = JSON.stringify({ "hours": hh, "date": today, "student": id });
+  
+    // Sending data with the request 
+    xhr.send(data); 
+}
 
 
 
