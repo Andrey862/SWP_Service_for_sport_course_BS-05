@@ -52,7 +52,7 @@ async function do_fetch(urrl) {
     let std = data['students'];
     for(var j=0; j<std.length; j++){
         var full_name = std[j]['first_name'] + " " + std[j]['last_name'];
-        console.log( std[j] );
+        // console.log( std[j] );
 
         var row1 = table.insertRow(table.rows.length - tmp);
         var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
