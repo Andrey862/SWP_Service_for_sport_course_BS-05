@@ -103,8 +103,8 @@ function add_hour(hh, id){
     // console.log(id);
     // console.log('\n');
 
-    console.log(std_hh);
-    console.log(std_fn);
+    // console.log(std_hh);
+    // console.log(std_fn);
 
     if ( std_hh[id] + hh > 3 ){
         console.log('no way');
