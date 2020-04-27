@@ -1,4 +1,14 @@
 var tmp = 0;
+std_hh = {};
+std_fn = {};
+
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+var yyyy = today.getFullYear();
+
+today = String(yyyy + '-' + mm + '-' + dd);
+
 
 function show_groups(){
     fetch('http://194.87.102.88/api/groups/')
@@ -18,12 +28,11 @@ function show_groups(){
                 var row = table.insertRow(table.rows.length);
                 var cell = row.insertCell(0).outerHTML = "<th class='group' colspan='4'>" + data[i]['name'] + "</th>";
 
-
                 arr_url.push(data[i]['url']);
             }
+
             show_students(arr_url);
         });
-
     // add_hour();
 }
 
@@ -35,12 +44,33 @@ String.prototype.format = function() {
   return a
 }
 
+function get_data(){
+    fetch('http://194.87.102.88/api/hours/')
+        .then(function(resp) {
+            return resp.json();
+        })
+        .then(function(data) {
+            // console.log( data );
+
+            for(var i=0; i<data.length; i++){
+                // console.log( data[i] );
+                if (today == data[i]['date']) {
+                    std_hh[data[i]['student']] += data[i]['hours'];
+                }
+            }
+
+        });
+
+}
+
 async function show_students(arr_url){
     for (var i=0; i<arr_url.length; i++){
-        
         const url = arr_url[i];
         let res = await do_fetch(url);
     }
+    // console.log(std_hh);
+    // console.log(std_fn);
+    get_data();
 }
 
 async function do_fetch(urrl) {
@@ -53,6 +83,8 @@ async function do_fetch(urrl) {
     for(var j=0; j<std.length; j++){
         var full_name = std[j]['first_name'] + " " + std[j]['last_name'];
         // console.log( std[j] );
+        std_hh[String(std[j]['id'])] = 0;
+        std_fn[String(std[j]['id'])] = full_name;
 
         var row1 = table.insertRow(table.rows.length - tmp);
         var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
@@ -71,6 +103,16 @@ function add_hour(hh, id){
     // console.log(id);
     // console.log('\n');
 
+    console.log(std_hh);
+    console.log(std_fn);
+
+    if ( std_hh[id] + hh > 3 ){
+        console.log('no way');
+    }
+    else {
+        std_hh[id] += hh;
+    }
+
     let xhr = new XMLHttpRequest();
     let url = "http://194.87.102.88/api/hours/";
 
@@ -88,13 +130,6 @@ function add_hour(hh, id){
 
         } 
     };
-
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    var yyyy = today.getFullYear();
-
-    today = String(yyyy + '-' + mm + '-' + dd);
 
     var data = JSON.stringify({ "hours": hh, "date": today, "student": id });
   
