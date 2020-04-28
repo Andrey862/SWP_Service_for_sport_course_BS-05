@@ -24,27 +24,67 @@ function Course(props) {
     )
 }
 
+	
+
 class App extends React.Component {
 
     state = getAllCourses()
 
     render() {
         return (
+        
+
             <div className="app">
 
-				<div className="title">
-					<h2> Change schedule </h2>
+				<div className="container5">
+
+					<div className="title">
+						<h2> Change schedule </h2>
+					</div>
+
+					<div className="list">
+						{this.state.courses.map(course => {
+							return (
+								<Course course={course} key={course.name + Math.random()}/>
+							)
+						})}
+					</div>
 				</div>
+                
+                <div className="container6">
+                
+					<div className="title2">
+						<h2> Create group </h2>
+					</div>
 
-                <div className="list">
-                    {this.state.courses.map(course => {
-                        return (
-                            <Course course={course} key={course.name + Math.random()}/>
-                        )
-                    })}
-                </div>
+					 <div className="card2">
+				   
+						 
+						 <div className="container7">
+							
+								<h3>Class name</h3>
+								<input className="input" type="text" id="className"/>
+								
+								<h3>Trainer name</h3>
+								<input className="input" type="text" id="trainerName"/>
+								
+								<h3>Trainer surname</h3>
+								<input className="input" type="text" id="trainerSurname"/>
+								
+								<h3>Schedule</h3>
+								<input className="input" type="text" id="schedule"/>
+						
+						 </div>
+						 
+						 <div className="container8">
+							<button className="btn" id="CreateGroup"> <a>Create</a> </button>
+						 </div>
+						 
+					</div>
+					
+				</div>
+        </div>
 
-            </div>
         )
     }
 }
@@ -53,7 +93,9 @@ class App extends React.Component {
 function getAllCourses() {
     var courses = []
 
-    const url = "http://194.87.102.88/api/groups/";
+	
+
+    const url = "http://194.87.102.88/api/groups/"
 
     // Create a request variable and assign a new XMLHttpRequest object to it.
     const request = new XMLHttpRequest()
@@ -81,7 +123,7 @@ function getAllCourses() {
             courses.push({
                 id: course["id"],
                 name: course["name"],
-                trainer: course["trainer"]["first_name"],
+                trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"],
                 schedule: sch["schedule"]
             })
         }
@@ -112,6 +154,8 @@ function addEventHandler() {
         }
     }
 
+	document.getElementById("CreateGroup").onclick = getTrainerId
+
     // Send request
     request.send()
 }
@@ -128,6 +172,8 @@ function handleButtonClick() {
         alert(`Empty schedule: please, fill the field`)
     }
 }
+
+
 
 function saveSchedule(newSchedule, courseId) {
     const url = `http://194.87.102.88/api/groups/${courseId}/`
@@ -156,7 +202,74 @@ function saveSchedule(newSchedule, courseId) {
 }
 
 
+function getTrainerId(){
+	
+	const trainerName = document.getElementById("trainerName").value
+	const trainerSurname = document.getElementById("trainerSurname").value
+	const className = document.getElementById("className").value
+	const newSchedule = document.getElementById("schedule").value
+	
+	
+	
+	const urlDownload = "http://194.87.102.88/api/users/?is_student=&is_trainer=true&is_manager=";
+	const urlUpload = "http://194.87.102.88/api/groups/"
+
+    // Create a request variable and assign a new XMLHttpRequest object to it.
+    const request = new XMLHttpRequest()
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', urlDownload, false)
+
+    request.send()
+    var trainerId = '-1'
+    JSON.parse(request.responseText).forEach(user => {
+		if (trainerName == user['first_name'] && trainerSurname == user['last_name']){
+			trainerId = user['id']
+			
+		}
+	}
+    )
+
+	if (className == ""){
+		alert('Enter class name')
+	} else {
+
+		if (trainerId != '-1'){
+			
+			const newData = {
+				name: className,
+				schedule: newSchedule,
+				trainer: trainerId
+			}
+			
+			const json = JSON.stringify(newData);
+
+			fetch(urlUpload, {
+				method: 'POST',
+				body: JSON.stringify(newData),
+				headers:
+					{
+						"Content-type": "application/json; charset=UTF-8"
+					}
+			})
+			.then(response => {
+				if (response.status >= 200 && response.status < 400) {
+					alert(`You successfully created new group`)
+				} else {
+					alert("Server side error")
+				}
+			})
+		} else {
+			alert('No such trainer!')
+		}
+	}	
+
+}
+
 ReactDOM.render(<App/>, document.getElementById('root'))
 
 
 addEventHandler()
+
+
+
