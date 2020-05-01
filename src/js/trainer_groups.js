@@ -10,34 +10,35 @@ var yyyy = today.getFullYear();
 
 today = String(yyyy + '-' + mm + '-' + dd);
 
-function show_groups(){
+function show_groups(tid){
     fetch('http://194.87.102.88/api/groups/')
         .then(function(resp) {
             return resp.json();
         })
         .then(function(data) {
             var table = document.getElementById("table");
-
             var arr_url = [];
-            tmp = data.length - 1;
 
             for(var i=0; i<data.length; i++){
-                var row = table.insertRow(table.rows.length);
-                var cell = row.insertCell(0).outerHTML = "<th class='group' colspan='4'>" + data[i]['name'] + "</th>";
+                if (data[i]['trainer']['id']  == tid){
+                    var row = table.insertRow(table.rows.length);
+                    var cell = row.insertCell(0).outerHTML = "<th class='group' colspan='4'>" + data[i]['name'] + "</th>";
 
-                arr_url.push(data[i]['url']);
+                    arr_url.push(data[i]['url']);  
+                    tmp++;  
+                }
             }
-
+            tmp--;
             show_students(arr_url);
         });
 }
 
 String.prototype.format = function() {
-  a = this;
-  for (k in arguments) {
-    a = a.replace("{" + k + "}", arguments[k])
-  }
-  return a
+    a = this;
+    for (k in arguments) {
+        a = a.replace("{" + k + "}", arguments[k])
+    }
+    return a
 }
 
 function get_data(){
