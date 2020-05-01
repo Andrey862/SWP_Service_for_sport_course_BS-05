@@ -48,6 +48,11 @@ nav ul li a {
     text-transform: uppercase;
 }
 
+nav ul li a:active, nav ul li a:hover{
+	background: #9bba88;
+	transition: .3s;
+}
+
 .wave {
     opacity: 0.2;
     position: fixed;
