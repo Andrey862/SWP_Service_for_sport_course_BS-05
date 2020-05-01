@@ -1,9 +1,9 @@
-body{
+body {
     margin: 0;
     padding: 0;
 }
 
-*{
+* {
     padding: 0;
     margin: 0;
     text-decoration: none;
@@ -11,17 +11,17 @@ body{
     box-sizing: border-box;
 }
 
-.navi{
+.navi {
     font-family: 'padding', sans-serif;
 }
 
-nav{
+nav {
     background: #83aa6b;
     height: 80px;
     width: 100%;
 }
 
-label.logo{
+label.logo {
     color: white;
     font-size: 35px;
     line-height: 80px;
@@ -29,18 +29,18 @@ label.logo{
     font-weight: bold;
 }
 
-nav ul{
+nav ul {
     float: right;
     margin-right: 20px;
 }
 
-nav ul li{
+nav ul li {
     display: inline-block;
     line-height: 80px;
     margin: 0 10px;
 }
 
-nav ul li a{
+nav ul li a {
     color: white;
     font-size: 17px;
     padding: 7px 13px;
@@ -48,7 +48,7 @@ nav ul li a{
     text-transform: uppercase;
 }
 
-.wave{
+.wave {
     opacity: 0.2;
     position: fixed;
     height: 110%;
@@ -58,58 +58,103 @@ nav ul li a{
 }
 
 
-a.active, a:hover{
+a.active, a:hover {
     background: #9bba88;
     transition: .3s;
 }
 
-.container1{
+/*a {*/
+/*    background: #D55C5F;*/
+/*}*/
+
+a {
+    background: #83aa6b;
+}
+
+.container1 {
     text-align: center;
     margin-top: 100px;
 }
 
-.container2{
+.container2 {
     text-align: center;
     margin-top: 10px
 }
 
-.btn{
+.btn {
     outline: none;
-    border: none;
     border-radius: 25px;
 
     width: 400px;
     height: 200px;
 
-    background: none;
     padding: 0px;
     font-size: 30px;
     cursor: pointer;
-
-    background-image: linear-gradient(to right, #83aa6b,  #83aa6b, #d8ffbd);
 
     margin: 10px;
     transition: 0.3s;
     position: relative;
 
-    color: #fff;
+    color: white;
     text-transform: uppercase;
-    
-    background-size: 200%;
+
+    opacity: 0.7;
+    background-size: 80%;
+    background-position: center;
+
+    /*background-blend-mode: revert;*/
+    /*background-size: cover;*/
 }
 
-.btn a{
+.btn.statistics {
+    background-image: url("../img/stats.png");
+    /*background-position: 10px -30px;*/
+}
+
+.btn.schedule {
+    background-image: url("../img/schedule2.png");
+    background-position: left;
+    background-size: 90%;
+}
+
+.btn.medicine {
+    background-image: url("../img/medicalReference.png");
+}
+
+.btn.chooseClass {
+    background-image: url("../img/chooseClass.png");
+}
+
+.btn.students {
+    background-image: url("../img/students.png");
+    background-size: 85%;
+}
+
+.btn.trainer {
+    background-image: url("../img/trainer.png");
+}
+
+.btn.groups {
+    background-image: url("../img/groups.png");
+    background-position: left;
+}
+
+.btn.markAttendance {
+    background-image: url("../img/markAttendance.png");
+    background-size: 90%;
+}
+
+/*button text color*/
+.btn a {
     padding: 7px 13px;
     border-radius: 10px;
-    color: #fff
+    color: white;
 }
 
-.btn:hover{
-    background-position: right;
+.btn:hover {
     cursor: pointer;
 }
-
-
 
 
 table.my_table {
@@ -137,13 +182,14 @@ table.my_table {
 
     background-color: #83aa6b;
 }
-.group:hover{
+
+.group:hover {
     background-color: #9bba88 !important;
     transition: .3s;
     /*cursor: pointer;*/
 }
 
-.student{
+.student {
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
 
@@ -154,14 +200,15 @@ table.my_table {
 
     border-radius: 10px;
 }
-.student:hover{
+
+.student:hover {
     background-color: #83aa6b !important;
     color: white;
     transition: .3s;
     /*cursor: pointer;*/
 }
 
-.btn_add{
+.btn_add {
     width: 60px;
 
 
@@ -175,7 +222,8 @@ table.my_table {
 
     border-radius: 10px;
 }
-.btn_add:hover{
+
+.btn_add:hover {
     background-color: #83aa6b !important;
     color: white;
     transition: .3s;
