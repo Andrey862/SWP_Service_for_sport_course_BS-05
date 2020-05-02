@@ -65,10 +65,6 @@ a.active, a:hover {
     background: #9bba88;
 }
 
-/*a {*/
-/*    background: #D55C5F;*/
-/*}*/
-
 a {
     background: #83aa6b;
 }
@@ -218,3 +214,85 @@ table.my_table {
     cursor: pointer;
 }
 
+.progress {
+    width: 70%;
+    height: 30px;
+    margin: 5% 15%;
+    border-radius: 10px; 
+    background-color: grey;
+    position: relative;
+}
+.progress:before {
+    content: attr(data-label);
+    font-size: 1.5em;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    position: absolute;
+    text-align: center;
+    top: 1px;
+    left: 0;
+    right: 0;
+    border-radius: 10px;
+}
+.progress .value {
+    background-color: #83aa6b;
+    display: inline-block;
+    height: 100%;
+    border-radius: 10px;
+}
+
+
+table.h_table {
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: left;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, 0px);
+}
+
+
+.hours {
+    width: 800px;
+    border: 1px solid #AAAAAA;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    color: white;
+    /*text-transform: uppercase;*/
+    font-family: 'Poppins', sans-serif;
+    background-color: #83aa6b;
+    word-spacing: 322px;
+}
+
+.hour{
+    border: 1px solid #AAAAAA;
+    padding: 1px 10px;
+    width: 30px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+}
+.hour:hover{
+    background-color: #83aa6b !important;
+    color: white;
+    transition: .3s;
+}
+
+.date{
+    border: 1px solid #AAAAAA;
+    padding: 5px 16px;
+    width: 740px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    word-spacing: 310px;
+    cursor: pointer;
+}
+.date:hover{
+    background-color: #83aa6b !important;
+    color: white;
+    transition: .3s;
+}
