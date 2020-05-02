@@ -8,7 +8,7 @@ function Course(props){
 			</div>
 
 			<div className="container2">
-				<button className="btn" id={props.course.id}><a>Delete</a></button>	
+				<button className="btn" id={props.course.id} onClick={e => handleButtonClick(props.course.id)}><a>Delete</a></button>	
 			</div>	
 
 		</div>	
@@ -17,14 +17,7 @@ function Course(props){
 
 class App extends React.Component {
 
-	state = {
-		courses: [
-			{id: '1', name: 'Swimming', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},	
-			{id: '2', name: 'Functional training', trainer:'Eduard Shaimardanov', schedule:'Пн., Вт., Ср. в 17:00'},	
-			{id: '3', name: 'Stretching', trainer:'Pavlova Alina', schedule:'Пн., Вт., Ср. в 17:00'},
-			
-		]	
-	}
+	state = getMyClasses()
 
 	render(){
 		return (
@@ -51,6 +44,141 @@ class App extends React.Component {
 
 }
 
+function getMyClasses(){
+
+	var courses = []
+	const url = "http://194.87.102.88/api/groups/"
+	 
+	//put id from local storage after authentication
+	window.localStorage.setItem('id', '2');
+	var current = window.localStorage.getItem('id');
+	
+
+    // Create a request variable and assign a new XMLHttpRequest object to it.
+    const request = new XMLHttpRequest()
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', url, false)
+
+    // Send request
+    request.send()
+
+    JSON.parse(request.responseText).forEach(course => {
+
+			const url2 = course['url'];
+			const request2 = new XMLHttpRequest();
+			
+			// Open a new connection, using the GET request on the URL endpoint
+			request2.open('GET', url2, false);
+
+			// Send request
+			request2.send();
+			
+			
+			let sch = JSON.parse(request2.responseText);
+			
+			//show only classes in which student is enrolled
+			sch["students"].forEach(student => {
+					
+					if (student["id"] == current){
+						courses.push({
+							id: course["id"],
+							name: course["name"],
+							trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"],
+							schedule: sch["schedule"]
+						})	
+					}
+			}) 
+
+            
+        }
+    )
+
+    return {courses: courses}
+
+}
+
+function handleButtonClick(id) {
+	
+	//put id from local storage after authentication
+	window.localStorage.setItem('id', '2');
+	var current = window.localStorage.getItem('id');
+	
+    /*var arr = ['2', '3', '4']
+    var ind = arr.indexOf('2');
+    arr.splice(ind, 1);
+    alert(arr)*/
+    
+    const group_url = "http://194.87.102.88/api/groups/";
+    
+    const request = new XMLHttpRequest()
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', group_url, false)
+
+    // Send request
+    request.send()
+
+    JSON.parse(request.responseText).forEach(course => {
+
+		if(id == course['id']){
+			const url2 = course['url'];
+			const request2 = new XMLHttpRequest()
+
+			// Open a new connection, using the GET request on the URL endpoint
+			request2.open('GET', url2, false)
+
+			// Send request
+			request2.send()
+
+			let group = JSON.parse(request2.responseText);
+			
+			var arr = []
+			group['students'].forEach(st => {
+				if (st['id'] != current){
+					arr.push(st['id'])
+				}
+			})
+			
+			const newData = {
+				id: course['id'],
+				name: course['name'],
+				schedule: group['schedule'],
+				trainer: group['trainer']['id'],
+				students: arr
+			}
+			/*newData['students'].remove(current)
+			var ind = newData['students'].indexOf(current);
+			newData['students'].splice(ind, 1);*/
+			
+			const json = JSON.stringify(newData);
+			
+			
+			//send new data to API
+			fetch(url2, {
+				method: 'PATCH',
+				body: JSON.stringify(newData),
+				headers:
+					{
+						"Content-type": "application/json; charset=UTF-8"
+					}
+			})
+			.then(response => {
+				if (response.status >= 200 && response.status < 400) {
+					alert('You successfully left ' + group['name'] + ' class')
+					
+				} else {
+					alert("Server side error")
+				}
+			})
+			
+		}
+			
+	})
+    
+	
+    
+}
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

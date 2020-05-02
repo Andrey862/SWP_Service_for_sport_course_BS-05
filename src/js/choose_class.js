@@ -8,7 +8,7 @@ function Course(props){
 			</div>
 
 			<div className="container2">
-				<button className="btn" id={props.course.id}><a>Choose</a></button>	
+				<button className="btn" id={props.course.id} onClick={e => handleButtonClick(props.course.id)}><a>Choose</a></button>	
 			</div>	
 
 		</div>	
@@ -16,7 +16,15 @@ function Course(props){
 }
 
 class App extends React.Component {
+	
+	/*constructor(props) {
+		super(props);
+		//this.state = {isToggleOn: true};
 
+		// This binding is necessary to make `this` work in the callback
+		this.handleButtonClick(e) = handleClick.bind(this,e);
+	}*/
+	
 	state = getAllCourses()
 
 	render(){
@@ -45,6 +53,10 @@ class App extends React.Component {
 }
 
 function getAllCourses(){
+	//put id from local storage after authentication
+	window.localStorage.setItem('id', '2');
+	var current = window.localStorage.getItem('id');
+	
 	var courses = []
 
 	const url = "http://194.87.102.88/api/groups/";
@@ -62,24 +74,32 @@ function getAllCourses(){
 			
 			const url2 = course['url'];
 			const request2 = new XMLHttpRequest();
-			//alert(url);
+			
 			// Open a new connection, using the GET request on the URL endpoint
 			request2.open('GET', url2, false);
 
 			// Send request
 			request2.send();
-			//alert(request2.responseText);
-			
+				
 			let sch = JSON.parse(request2.responseText);
+			var flag = 0
+			sch['students'].forEach(student => {
+				if (current == student['id']){
+					flag = 1
+				}
+			})
 			
-            courses.push({
-				url: course["url"],
-                id: course["id"],
-                name: course["name"],
-                trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"],
-                schedule: sch["schedule"]
-                
-            })
+			//show class only if current student is not already inrolled in it
+			if (flag == 0){
+				courses.push({
+					url: course["url"],
+					id: course["id"],
+					name: course["name"],
+					trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"],
+					schedule: sch["schedule"]
+					
+				})
+			}
         }
     );
     
@@ -89,10 +109,80 @@ function getAllCourses(){
 }
 
 
+
+function handleButtonClick(id) {
+	
+	//put id from local storage after authentication
+	window.localStorage.setItem('id', '2');
+	var current = window.localStorage.getItem('id');
+	
+    
+    const group_url = "http://194.87.102.88/api/groups/";
+    
+    const request = new XMLHttpRequest()
+
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', group_url, false)
+
+    // Send request
+    request.send()
+
+    JSON.parse(request.responseText).forEach(course => {
+
+		if(id == course['id']){
+			const url2 = course['url'];
+			const request2 = new XMLHttpRequest()
+
+			// Open a new connection, using the GET request on the URL endpoint
+			request2.open('GET', url2, false)
+
+			// Send request
+			request2.send()
+
+			let group = JSON.parse(request2.responseText);
+			
+			var arr = []
+			group['students'].forEach(st => {
+				arr.push(st['id'])
+			})
+			
+			const newData = {
+				id: course['id'],
+				name: course['name'],
+				schedule: group['schedule'],
+				trainer: group['trainer']['id'],
+				students: arr
+			}
+			newData['students'].push(current)
+			
+			const json = JSON.stringify(newData);
+			
+			
+			//send new data to API
+			fetch(url2, {
+				method: 'PATCH',
+				body: JSON.stringify(newData),
+				headers:
+					{
+						"Content-type": "application/json; charset=UTF-8"
+					}
+			})
+			.then(response => {
+				if (response.status >= 200 && response.status < 400) {
+					alert('You successfully enrolled in ' + group['name'] + ' class')
+				} else {
+					alert("Server side error")
+				}
+			})
+			
+		}
+			
+	})
+    
+	
+    
+}
+
 ReactDOM.render(<App />, document.getElementById('root'))
-
-
-
-
 
 
