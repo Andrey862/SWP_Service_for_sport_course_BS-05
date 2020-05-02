@@ -66,6 +66,7 @@ async function show_students(arr_url){
 async function do_fetch(urrl) {
     let res = await fetch(urrl);
     let data = await res.json();
+    var table = document.getElementById("table");
 
     let std = data['students'];
     for(var j=0; j<std.length; j++){
@@ -75,9 +76,9 @@ async function do_fetch(urrl) {
 
         var row1 = table.insertRow(table.rows.length - tmp);
         var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
-        var cell1 = row1.insertCell(1).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(1, {1});'>".format(std[j]['id']) + "1 hours" + "</td>";
-        var cell1 = row1.insertCell(2).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(2, {1});'>".format(std[j]['id']) + "2 hours" + "</td>";
-        var cell1 = row1.insertCell(3).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(3, {1});'>".format(std[j]['id']) + "3 hours" + "</td>";
+        var cell1 = row1.insertCell(1).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(1, {0});'>".format(std[j]['id']) + "1 hours" + "</td>";
+        var cell1 = row1.insertCell(2).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(2, {0});'>".format(std[j]['id']) + "2 hours" + "</td>";
+        var cell1 = row1.insertCell(3).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(3, {0});'>".format(std[j]['id']) + "3 hours" + "</td>";
     }
 
     tmp--;
@@ -85,6 +86,8 @@ async function do_fetch(urrl) {
 }
 
 function add_hour(hh, id){
+    // console.log('beka');
+    
     if ( std_hh[id] + hh > 3 ){
         return 0;
     }
