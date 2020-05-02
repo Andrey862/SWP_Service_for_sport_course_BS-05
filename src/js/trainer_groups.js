@@ -89,6 +89,7 @@ function add_hour(hh, id){
     // console.log('beka');
     
     if ( std_hh[id] + hh > 3 ){
+		alert('You cannot add more than 3 hours per day')
         return 0;
     }
     else {
@@ -108,4 +109,15 @@ function add_hour(hh, id){
 
     var data = JSON.stringify({ "hours": hh, "date": today, "student": id });
     xhr.send(data); 
+    
+    const students_url = "http://194.87.102.88/api/users/?is_student=true";
+    const request = new XMLHttpRequest()
+    request.open('GET', students_url, false)
+    request.send()
+
+    JSON.parse(request.responseText).forEach(st => {
+		if (st['id'] == id){
+			alert('You added ' + hh + ' hours to ' +  st['first_name'] + ' ' + st['last_name'])
+		}
+	})
 }
