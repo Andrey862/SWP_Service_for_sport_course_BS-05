@@ -1,53 +1,16 @@
 var current = window.localStorage.getItem('id');
 var token = window.localStorage.getItem('token');
 
-function Course(props){
-	return (
-		<div className="card_tr">
-			<div className="container1">
-				<h3 className="name">{props.course.name}</h3>
-				
-				<p className="schedule">{props.course.schedule}</p>	
-			</div>
-
-		</div>	
-	)
-}
-
-class App extends React.Component {
-
-	state = getMyClasses()
-
-	render(){
-		return (
-			<div className="app">
-
-				<div className="title">
-					<h2> My classes </h2>
-				</div>
-
-				<div className="list_tr">
-					{ this.state.courses.map(course => {
-						return (
-							<Course course={course} key={course.name + Math.random()} />
-						)
-					})	}
-				</div>
-
-			</div>
-
-			
-		)
-	}
 
 
-}
-
-function getMyClasses(){
-
-	var courses = []
-	const url = "http://194.87.102.88/api/groups/"
+function show_schedule(){
 	
+	var table = document.getElementById("table");
+	var row = table.insertRow(table.rows.length);
+	var cell = row.insertCell(0).outerHTML = "<th class='hours'>" + "Name" + "</th>";
+	var cell = row.insertCell(1).outerHTML = "<th class='hours1'>" + "Time" + "</th>";
+
+	const url = "http://194.87.102.88/api/groups/"
 
     // Create a request variable and assign a new XMLHttpRequest object to it.
     const request = new XMLHttpRequest()
@@ -74,12 +37,11 @@ function getMyClasses(){
 			
 			//show only classes in which student is enrolled
 			if (sch["trainer"]["id"] == current){
-				courses.push({
-							id: course["id"],
-							name: course["name"],
-							trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"],
-							schedule: sch["schedule"]
-						})
+				var row = table.insertRow(table.rows.length);
+		
+				var cell = row.insertCell(0).outerHTML = "<td class='date'>"  + course['name']  + "</td>";
+				var cell = row.insertCell(1).outerHTML = "<td class='date1'>"  + sch['schedule'] + "</td>";
+
 			}
 			
 
@@ -87,16 +49,8 @@ function getMyClasses(){
         }
     )
 
-    return {courses: courses}
+
 
 }
-
-
-
-ReactDOM.render(<App />, document.getElementById('root'))
-
-
-
-
 
 

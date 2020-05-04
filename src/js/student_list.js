@@ -7,9 +7,9 @@ function show_students(){
 	
 	var table = document.getElementById("table");
 	var row = table.insertRow(table.rows.length);
-	var cell = row.insertCell(0).outerHTML = "<th class='hours'>" + "Name" + "</th>";
-	var cell = row.insertCell(1).outerHTML = "<th class='hours'>" + "Surname" + "</th>";
-	var cell = row.insertCell(2).outerHTML = "<th class='hours'>" + "Email" + "</th>";
+	var cell = row.insertCell(0).outerHTML = "<th class='name'>" + "Name" + "</th>";
+	var cell = row.insertCell(1).outerHTML = "<th class='name'>" + "Surname" + "</th>";
+	var cell = row.insertCell(2).outerHTML = "<th class='name'>" + "Email" + "</th>";
 	
 	const url = "http://194.87.102.88/api/users/?is_student=true"
 	
@@ -27,9 +27,9 @@ function show_students(){
 			
 		var row = table.insertRow(table.rows.length);
 		
-		var cell = row.insertCell(0).outerHTML = "<td class='date'>"  + st['first_name']  + "</td>";
-		var cell = row.insertCell(1).outerHTML = "<td class='date'>"  + st['last_name'] + "</td>";
-		var cell = row.insertCell(2).outerHTML = "<td class='date'>"  +  st['email']  + "</td>";
+		var cell = row.insertCell(0).outerHTML = "<td class='info'>"  + st['first_name']  + "</td>";
+		var cell = row.insertCell(1).outerHTML = "<td class='info'>"  + st['last_name'] + "</td>";
+		var cell = row.insertCell(2).outerHTML = "<td class='info'>"  +  st['email']  + "</td>";
 
     })
 	

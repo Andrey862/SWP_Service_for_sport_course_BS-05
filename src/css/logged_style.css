@@ -245,7 +245,7 @@ table.my_table {
 
 table.h_table {
     overflow: hidden;
-    border-radius: 0px;
+    border-radius: 10px;
     text-align: left;
     position: absolute;
     top: 30%;
@@ -257,7 +257,37 @@ table.h_table {
 .hours {
     width: 800px;
     border: 1px solid #AAAAAA;
+    
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    color: white;
+    /*text-transform: uppercase;*/
+    font-family: 'Poppins', sans-serif;
+    background-color: #83aa6b;
+    word-spacing: 322px;
     border-radius: 10px;
+}
+
+.hours1 {
+    width: 200px;
+    border: 1px solid #AAAAAA;
+    
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    color: white;
+    /*text-transform: uppercase;*/
+    font-family: 'Poppins', sans-serif;
+    background-color: #83aa6b;
+    word-spacing: 322px;
+    border-radius: 10px;
+}
+
+.name {
+    width: 800px;
+    border: 1px solid #AAAAAA;
+    
     padding-top: 15px;
     padding-bottom: 15px;
     padding-left: 20px;
@@ -292,7 +322,30 @@ table.h_table {
     word-spacing: 310px;
     cursor: pointer;
 }
-.date:hover{
+
+
+.date1{
+    border: 1px solid #AAAAAA;
+    padding: 5px 16px;
+    width: 200px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 10px;
+    word-spacing: 310px;
+    cursor: pointer;
+}
+
+.info{
+    border: 1px solid #AAAAAA;
+    padding: 5px 16px;
+    width: 740px;
+    font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    word-spacing: 310px;
+    cursor: pointer;
+}
+
+.date :hover{
     background-color: #83aa6b !important;
     color: white;
     transition: .3s;
