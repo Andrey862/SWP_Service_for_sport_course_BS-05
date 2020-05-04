@@ -93,8 +93,3 @@ async function getTypeOfUser(id, token) {
 
     return userType;
 }
-
-
-document.getElementById('my_statistics').onclick = function validation() {
-    window.location.href = 'student.statistics.html';
-}
