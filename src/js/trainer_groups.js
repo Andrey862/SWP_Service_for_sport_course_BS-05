@@ -11,8 +11,14 @@ var yyyy = today.getFullYear();
 
 today = String(yyyy + '-' + mm + '-' + dd);
 
-function show_groups(tid) {
-    fetch('http://194.87.102.88/api/groups/')
+function show_groups() {
+    fetch('http://194.87.102.88/api/groups/', {
+        headers:
+            {
+                "Content-type": "application/json; charset=UTF-8",
+                'Authorization': `Token ${token}`
+            }
+    })
         .then(function (resp) {
             return resp.json();
         })
@@ -21,7 +27,7 @@ function show_groups(tid) {
             var arr_url = [];
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i]['trainer']['id'] == tid) {
+                if (data[i]['trainer']['id'] == current) {
                     var row = table.insertRow(table.rows.length);
                     var cell = row.insertCell(0).outerHTML = "<th class='group' colspan='4'>" + data[i]['name'] + "</th>";
 
@@ -71,7 +77,13 @@ async function show_students(arr_url) {
 }
 
 async function do_fetch(urrl) {
-    let res = await fetch(urrl);
+    let res = await fetch(urrl, {
+        headers:
+            {
+                "Content-type": "application/json; charset=UTF-8",
+                'Authorization': `Token ${token}`
+            }
+    });
     let data = await res.json();
     var table = document.getElementById("table");
 
@@ -106,6 +118,7 @@ function add_hour(hh, id) {
     let url = "http://194.87.102.88/api/hours/";
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader('Authorization', `Token ${token}`)
 
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -119,6 +132,7 @@ function add_hour(hh, id) {
     const students_url = "http://194.87.102.88/api/users/?is_student=true";
     const request = new XMLHttpRequest()
     request.open('GET', students_url, false)
+    request.setRequestHeader('Authorization', `Token ${token}`)
     request.send()
 
     JSON.parse(request.responseText).forEach(st => {

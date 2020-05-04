@@ -92,7 +92,7 @@ class App extends React.Component {
 }
 
 
-async function getAllCourses() {
+function getAllCourses() {
 
     var courses = []
 
@@ -108,31 +108,35 @@ async function getAllCourses() {
     // Send request
     request.send()
 
-    JSON.parse(request.responseText).forEach(course => {
+		
+	JSON.parse(request.responseText).forEach(course => {
 
-            const url2 = course['url'];
-            const request2 = new XMLHttpRequest();
-            //alert(url);
-            // Open a new connection, using the GET request on the URL endpoint
-            request2.open('GET', url2, false);
-            request2.setRequestHeader('Authorization', `Token ${token}`)
+		const url2 = course['url'];
+		const request2 = new XMLHttpRequest();
+		//alert(url);
+		// Open a new connection, using the GET request on the URL endpoint
+		request2.open('GET', url2, false);
+		request2.setRequestHeader('Authorization', `Token ${token}`)
 
-            // Send request
-            request2.send();
-            //alert(request2.responseText);
+		// Send request
+		request2.send();
+		//alert(request2.responseText);
 
-            let sch = JSON.parse(request2.responseText);
+		let sch = JSON.parse(request2.responseText);
 
-            courses.push({
-                id: course["id"],
-                name: course["name"],
-                trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"],
-                schedule: sch["schedule"]
-            })
-        }
-    )
-
+		courses.push({
+			id: course["id"],
+			name: course["name"],
+			trainer: course["trainer"]["first_name"] + " " + course["trainer"]["last_name"],
+			schedule: sch["schedule"]
+		})
+	}
+	)
+		
+		
     return {courses: courses}
+
+    
 }
 
 //function add event handler on buttons clicks

@@ -1,8 +1,17 @@
+let current = window.localStorage.getItem('id');
+let token = window.localStorage.getItem('token');
+
 var hh = 0;
 
 function show_hours(id) {
 
-    fetch('http://194.87.102.88/api/hours/')
+    fetch('http://194.87.102.88/api/hours/', {
+        headers:
+            {
+                "Content-type": "application/json; charset=UTF-8",
+                'Authorization': `Token ${token}`
+            }
+    })
         .then(function (resp) {
             return resp.json();
         })
@@ -10,7 +19,7 @@ function show_hours(id) {
             var hours = [];
 
             for (var i = 0; i < data.length; i++) {
-                if (data[i]['student'] == id) {
+                if (data[i]['student'] == current) {
                     hh += data[i]['hours'];
                     hours.push(data[i]);
                 }
@@ -44,12 +53,12 @@ function put_hours(arr) {
 
     var table = document.getElementById("table");
     var row = table.insertRow(table.rows.length);
-    var cell = row.insertCell(0).outerHTML = "<th class='hours'>" + "Club Date Hour" + "</th>";
+    var cell = row.insertCell(0).outerHTML = "<th class='hours'>" + "Date Hour" + "</th>";
 
     for (var i = arr.length - 1; i >= 0; i--) {
         var row = table.insertRow(table.rows.length);
-        var club = 'Sambo ';
-        var cell = row.insertCell(0).outerHTML = "<td class='date'>" + club + arr[i]['date'] + ' ' + arr[i]['hours'] + "</td>";
+        //var club = 'Sambo ';
+        var cell = row.insertCell(0).outerHTML = "<td class='date'>"  + arr[i]['date'] + ' ' + arr[i]['hours'] + "</td>";
 
     }
 }
