@@ -34,10 +34,13 @@ document.getElementById('login_btn').onclick = async function validation() {
     switch (typeOfUser) {
         case "is_student":
             window.location.href = 'student.html';
+            break;
         case "is_manager":
-            window.location.href = "admin.html"
+            window.location.href = "admin.html";
+            break;
         case "is_trainer":
-            window.location.href = "trainer.html"
+            window.location.href = "trainer.html";
+            break;
     }
 }
 
