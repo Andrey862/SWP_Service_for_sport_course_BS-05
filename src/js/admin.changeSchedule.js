@@ -1,11 +1,14 @@
+let current = window.localStorage.getItem('id');
+let token = window.localStorage.getItem('token');
+
 function Course(props) {
 
     return (
         <div className="card">
             <div className="container1">
                 <h3 className="name">{props.course.name}</h3>
-				<p>{props.course.trainer}</p>
-				<p className="schedule">{props.course.schedule}</p>
+                <p>{props.course.trainer}</p>
+                <p className="schedule">{props.course.schedule}</p>
             </div>
 
 
@@ -24,7 +27,6 @@ function Course(props) {
     )
 }
 
-	
 
 class App extends React.Component {
 
@@ -32,68 +34,67 @@ class App extends React.Component {
 
     render() {
         return (
-        
+
 
             <div className="app">
 
-				<div className="container5">
+                <div className="container5">
 
-					<div className="title">
-						<h2> Change schedule </h2>
-					</div>
+                    <div className="title">
+                        <h2> Change schedule </h2>
+                    </div>
 
-					<div className="list">
-						{this.state.courses.map(course => {
-							return (
-								<Course course={course} key={course.name + Math.random()}/>
-							)
-						})}
-					</div>
-				</div>
-                
+                    <div className="list">
+                        {this.state.courses.map(course => {
+                            return (
+                                <Course course={course} key={course.name + Math.random()}/>
+                            )
+                        })}
+                    </div>
+                </div>
+
                 <div className="container6">
-                
-					<div className="title2">
-						<h2> Create group </h2>
-					</div>
 
-					 <div className="card2">
-				   
-						 
-						 <div className="container7">
-							
-								<h3>Class name</h3>
-								<input className="input" type="text" id="className"/>
-								
-								<h3>Trainer name</h3>
-								<input className="input" type="text" id="trainerName"/>
-								
-								<h3>Trainer surname</h3>
-								<input className="input" type="text" id="trainerSurname"/>
-								
-								<h3>Schedule</h3>
-								<input className="input" type="text" id="schedule"/>
-						
-						 </div>
-						 
-						 <div className="container8">
-							<button className="btn" id="CreateGroup"> <a>Create</a> </button>
-						 </div>
-						 
-					</div>
-					
-				</div>
-        </div>
+                    <div className="title2">
+                        <h2> Create group </h2>
+                    </div>
+
+                    <div className="card2">
+
+
+                        <div className="container7">
+
+                            <h3>Class name</h3>
+                            <input className="input" type="text" id="className"/>
+
+                            <h3>Trainer name</h3>
+                            <input className="input" type="text" id="trainerName"/>
+
+                            <h3>Trainer surname</h3>
+                            <input className="input" type="text" id="trainerSurname"/>
+
+                            <h3>Schedule</h3>
+                            <input className="input" type="text" id="schedule"/>
+
+                        </div>
+
+                        <div className="container8">
+                            <button className="btn" id="CreateGroup"><a>Create</a></button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
 
         )
     }
 }
 
 
-function getAllCourses() {
-    var courses = []
+async function getAllCourses() {
 
-	
+    var courses = []
 
     const url = "http://194.87.102.88/api/groups/"
 
@@ -102,23 +103,25 @@ function getAllCourses() {
 
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', url, false)
+    request.setRequestHeader('Authorization', `Token ${token}`)
 
     // Send request
     request.send()
 
     JSON.parse(request.responseText).forEach(course => {
 
-			const url2 = course['url'];
-			const request2 = new XMLHttpRequest();
-			//alert(url);
-			// Open a new connection, using the GET request on the URL endpoint
-			request2.open('GET', url2, false);
+            const url2 = course['url'];
+            const request2 = new XMLHttpRequest();
+            //alert(url);
+            // Open a new connection, using the GET request on the URL endpoint
+            request2.open('GET', url2, false);
+            request2.setRequestHeader('Authorization', `Token ${token}`)
 
-			// Send request
-			request2.send();
-			//alert(request2.responseText);
-			
-			let sch = JSON.parse(request2.responseText);
+            // Send request
+            request2.send();
+            //alert(request2.responseText);
+
+            let sch = JSON.parse(request2.responseText);
 
             courses.push({
                 id: course["id"],
@@ -141,6 +144,7 @@ function addEventHandler() {
 
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', url, true)
+    request.setRequestHeader('Authorization', `Token ${token}`)
 
     request.onload = function () {
         var data = JSON.parse(this.response)
@@ -154,7 +158,7 @@ function addEventHandler() {
         }
     }
 
-	document.getElementById("CreateGroup").onclick = getTrainerId
+    document.getElementById("CreateGroup").onclick = getTrainerId
 
     // Send request
     request.send()
@@ -174,7 +178,6 @@ function handleButtonClick() {
 }
 
 
-
 function saveSchedule(newSchedule, courseId) {
     const url = `http://194.87.102.88/api/groups/${courseId}/`
 
@@ -189,7 +192,8 @@ function saveSchedule(newSchedule, courseId) {
         body: JSON.stringify(data),
         headers:
             {
-                "Content-type": "application/json; charset=UTF-8"
+                "Content-type": "application/json; charset=UTF-8",
+                'Authorization': `Token ${token}`
             }
     })
         .then(response => {
@@ -202,67 +206,68 @@ function saveSchedule(newSchedule, courseId) {
 }
 
 
-function getTrainerId(){
-	
-	const trainerName = document.getElementById("trainerName").value
-	const trainerSurname = document.getElementById("trainerSurname").value
-	const className = document.getElementById("className").value
-	const newSchedule = document.getElementById("schedule").value
-	
-	
-	
-	const urlDownload = "http://194.87.102.88/api/users/?is_student=&is_trainer=true&is_manager=";
-	const urlUpload = "http://194.87.102.88/api/groups/"
+function getTrainerId() {
+
+    const trainerName = document.getElementById("trainerName").value
+    const trainerSurname = document.getElementById("trainerSurname").value
+    const className = document.getElementById("className").value
+    const newSchedule = document.getElementById("schedule").value
+
+
+    const urlDownload = "http://194.87.102.88/api/users/?is_student=&is_trainer=true&is_manager=";
+    const urlUpload = "http://194.87.102.88/api/groups/"
 
     // Create a request variable and assign a new XMLHttpRequest object to it.
     const request = new XMLHttpRequest()
 
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', urlDownload, false)
+    request.setRequestHeader('Authorization', `Token ${token}`)
 
     request.send()
     var trainerId = '-1'
     JSON.parse(request.responseText).forEach(user => {
-		if (trainerName == user['first_name'] && trainerSurname == user['last_name']){
-			trainerId = user['id']
-			
-		}
-	}
+            if (trainerName == user['first_name'] && trainerSurname == user['last_name']) {
+                trainerId = user['id']
+
+            }
+        }
     )
 
-	if (className == ""){
-		alert('Enter class name')
-	} else {
+    if (className == "") {
+        alert('Enter class name')
+    } else {
 
-		if (trainerId != '-1'){
-			
-			const newData = {
-				name: className,
-				schedule: newSchedule,
-				trainer: trainerId
-			}
-			
-			const json = JSON.stringify(newData);
+        if (trainerId != '-1') {
 
-			fetch(urlUpload, {
-				method: 'POST',
-				body: JSON.stringify(newData),
-				headers:
-					{
-						"Content-type": "application/json; charset=UTF-8"
-					}
-			})
-			.then(response => {
-				if (response.status >= 200 && response.status < 400) {
-					alert(`You successfully created new group`)
-				} else {
-					alert("Server side error")
-				}
-			})
-		} else {
-			alert('No such trainer!')
-		}
-	}	
+            const newData = {
+                name: className,
+                schedule: newSchedule,
+                trainer: trainerId
+            }
+
+            const json = JSON.stringify(newData);
+
+            fetch(urlUpload, {
+                method: 'POST',
+                body: JSON.stringify(newData),
+                headers:
+                    {
+                        "Content-type": "application/json; charset=UTF-8",
+                        'Authorization': `Token ${token}`
+                    }
+            })
+                .then(response => {
+                    if (response.status >= 200 && response.status < 400) {
+                        alert(`You successfully created new group`)
+                    } else {
+                        alert("Server side error")
+                    }
+                })
+        } else {
+            alert('No such trainer!')
+        }
+    }
 
 }
 

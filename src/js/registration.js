@@ -31,8 +31,8 @@ document.getElementById('signup_btn').onclick = async function validation() {
 
         window.location.href = 'login.html';
     } else {
-    	alert("Error")
-		return
+        alert("Error")
+        return
     }
 }
 
@@ -62,12 +62,11 @@ async function registerStudent(first_name, last_name, email, password) {
     let result = response.ok
 
     if (result) {
-    	window.localStorage.setItem('id', text['id']);
-    	window.localStorage.setItem('token', text['token']);
-
+        window.localStorage.setItem('id', text['id']);
+        window.localStorage.setItem('token', text['token']);
         return true
     } else {
-    	alert(response.statusText)
+        alert(response.statusText)
         return false
     }
 }

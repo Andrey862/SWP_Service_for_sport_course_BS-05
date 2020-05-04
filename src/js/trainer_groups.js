@@ -1,4 +1,5 @@
-
+let current = window.localStorage.getItem('id');
+let token = window.localStorage.getItem('token');
 var tmp = 0;
 std_hh = {};
 std_fn = {};
@@ -10,22 +11,22 @@ var yyyy = today.getFullYear();
 
 today = String(yyyy + '-' + mm + '-' + dd);
 
-function show_groups(tid){
+function show_groups(tid) {
     fetch('http://194.87.102.88/api/groups/')
-        .then(function(resp) {
+        .then(function (resp) {
             return resp.json();
         })
-        .then(function(data) {
+        .then(function (data) {
             var table = document.getElementById("table");
             var arr_url = [];
 
-            for(var i=0; i<data.length; i++){
-                if (data[i]['trainer']['id']  == tid){
+            for (var i = 0; i < data.length; i++) {
+                if (data[i]['trainer']['id'] == tid) {
                     var row = table.insertRow(table.rows.length);
                     var cell = row.insertCell(0).outerHTML = "<th class='group' colspan='4'>" + data[i]['name'] + "</th>";
 
-                    arr_url.push(data[i]['url']);  
-                    tmp++;  
+                    arr_url.push(data[i]['url']);
+                    tmp++;
                 }
             }
             tmp--;
@@ -33,7 +34,7 @@ function show_groups(tid){
         });
 }
 
-String.prototype.format = function() {
+String.prototype.format = function () {
     a = this;
     for (k in arguments) {
         a = a.replace("{" + k + "}", arguments[k])
@@ -41,13 +42,19 @@ String.prototype.format = function() {
     return a
 }
 
-function get_data(){
-    fetch('http://194.87.102.88/api/hours/')
-        .then(function(resp) {
+function get_data() {
+    fetch('http://194.87.102.88/api/hours/', {
+        headers:
+            {
+                "Content-type": "application/json; charset=UTF-8",
+                'Authorization': `Token ${token}`
+            }
+    })
+        .then(function (resp) {
             return resp.json();
         })
-        .then(function(data) {
-            for(var i=0; i<data.length; i++){
+        .then(function (data) {
+            for (var i = 0; i < data.length; i++) {
                 if (today == data[i]['date']) {
                     std_hh[data[i]['student']] += data[i]['hours'];
                 }
@@ -55,8 +62,8 @@ function get_data(){
         });
 }
 
-async function show_students(arr_url){
-    for (var i=0; i<arr_url.length; i++){
+async function show_students(arr_url) {
+    for (var i = 0; i < arr_url.length; i++) {
         const url = arr_url[i];
         let res = await do_fetch(url);
     }
@@ -69,7 +76,7 @@ async function do_fetch(urrl) {
     var table = document.getElementById("table");
 
     let std = data['students'];
-    for(var j=0; j<std.length; j++){
+    for (var j = 0; j < std.length; j++) {
         var full_name = std[j]['first_name'] + " " + std[j]['last_name'];
         std_hh[String(std[j]['id'])] = 0;
         std_fn[String(std[j]['id'])] = full_name;
@@ -85,39 +92,38 @@ async function do_fetch(urrl) {
     return 1;
 }
 
-function add_hour(hh, id){
+function add_hour(hh, id) {
     // console.log('beka');
-    
-    if ( std_hh[id] + hh > 3 ){
-		alert('You cannot add more than 3 hours per day')
+
+    if (std_hh[id] + hh > 3) {
+        alert('You cannot add more than 3 hours per day')
         return 0;
-    }
-    else {
+    } else {
         std_hh[id] += hh;
     }
 
     let xhr = new XMLHttpRequest();
     let url = "http://194.87.102.88/api/hours/";
-    xhr.open("POST", url, true); 
+    xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
 
-    xhr.onreadystatechange = function () { 
-        if (xhr.readyState === 4 && xhr.status === 200) { 
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
             result.innerHTML = this.responseText;
-        } 
+        }
     };
 
-    var data = JSON.stringify({ "hours": hh, "date": today, "student": id });
-    xhr.send(data); 
-    
+    var data = JSON.stringify({"hours": hh, "date": today, "student": id});
+    xhr.send(data);
+
     const students_url = "http://194.87.102.88/api/users/?is_student=true";
     const request = new XMLHttpRequest()
     request.open('GET', students_url, false)
     request.send()
 
     JSON.parse(request.responseText).forEach(st => {
-		if (st['id'] == id){
-			alert('You added ' + hh + ' hours to ' +  st['first_name'] + ' ' + st['last_name'])
-		}
-	})
+        if (st['id'] == id) {
+            alert('You added ' + hh + ' hours to ' + st['first_name'] + ' ' + st['last_name'])
+        }
+    })
 }
