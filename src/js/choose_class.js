@@ -1,3 +1,6 @@
+var current = window.localStorage.getItem('id');
+var token = window.localStorage.getItem('token');
+
 function Course(props){
 	return (
 		<div className="card">
@@ -17,13 +20,6 @@ function Course(props){
 
 class App extends React.Component {
 	
-	/*constructor(props) {
-		super(props);
-		//this.state = {isToggleOn: true};
-
-		// This binding is necessary to make `this` work in the callback
-		this.handleButtonClick(e) = handleClick.bind(this,e);
-	}*/
 	
 	state = getAllCourses()
 
@@ -53,9 +49,7 @@ class App extends React.Component {
 }
 
 function getAllCourses(){
-	//put id from local storage after authentication
-	window.localStorage.setItem('id', '2');
-	var current = window.localStorage.getItem('id');
+
 	
 	var courses = []
 
@@ -66,7 +60,7 @@ function getAllCourses(){
 
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', url, false);
-
+	request.setRequestHeader('Authorization', `Token ${token}`)
     // Send request
     request.send();
 
@@ -77,7 +71,7 @@ function getAllCourses(){
 			
 			// Open a new connection, using the GET request on the URL endpoint
 			request2.open('GET', url2, false);
-
+			request2.setRequestHeader('Authorization', `Token ${token}`)
 			// Send request
 			request2.send();
 				
@@ -112,10 +106,6 @@ function getAllCourses(){
 
 function handleButtonClick(id) {
 	
-	//put id from local storage after authentication
-	window.localStorage.setItem('id', '2');
-	var current = window.localStorage.getItem('id');
-	
     
     const group_url = "http://194.87.102.88/api/groups/";
     
@@ -123,7 +113,7 @@ function handleButtonClick(id) {
 
     // Open a new connection, using the GET request on the URL endpoint
     request.open('GET', group_url, false)
-
+	request.setRequestHeader('Authorization', `Token ${token}`)
     // Send request
     request.send()
 
@@ -135,7 +125,7 @@ function handleButtonClick(id) {
 
 			// Open a new connection, using the GET request on the URL endpoint
 			request2.open('GET', url2, false)
-
+			request2.setRequestHeader('Authorization', `Token ${token}`)
 			// Send request
 			request2.send()
 
@@ -164,7 +154,8 @@ function handleButtonClick(id) {
 				body: JSON.stringify(newData),
 				headers:
 					{
-						"Content-type": "application/json; charset=UTF-8"
+						"Content-type": "application/json; charset=UTF-8",
+						'Authorization': `Token ${token}`
 					}
 			})
 			.then(response => {
