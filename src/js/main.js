@@ -19,52 +19,26 @@ inputs.forEach(input => {
 
 
 document.getElementById('login_btn').onclick = async function validation() {
-    var username = document.getElementById('username').value;
-    var password = document.getElementById('password').value;
+    let username = document.getElementById('username').value;
+    let password = document.getElementById('password').value;
 
-    var admin_u = "admin";
-    var admin_p = "admin";
-
-    var trainer_u = "trainer";
-    var trainer_p = "trainer";
-
-    var student_u = "student";
-    var student_p = "student";
-
-    let data = await authentification(username, password)
+    let data = await authentication(username, password)
     let id = data['id']
     let token = data['token']
 
-    // alert(`Get: ${id} ${token}`)
-
     let typeOfUser = await getTypeOfUser(id, token)
 
-    alert(`Type: ${typeOfUser}`)
-
     switch (typeOfUser) {
-        case "student": {
+        case "is_student":
             window.location.href = 'student.html';
-        }
-        case "admin": {
+        case "is_manager":
             window.location.href = "admin.html"
-        }
-        case "trainer": {
+        case "is_trainer":
             window.location.href = "trainer.html"
-        }
     }
-
-    // if (username == admin_u && password == admin_p) {
-    //     window.location.href = 'admin.html';
-    // } else if (username == trainer_u && password == trainer_p) {
-    //     window.location.href = 'trainer.html';
-    // } else if (username == student_u && password == student_p) {
-    //     window.location.href = 'student.html';
-    // } else {
-    //     document.getElementById('notice').innerHTML = "Wrong username or/and password";
-    // }
 }
 
-async function authentification(email, password) {
+async function authentication(email, password) {
     let url = "http://194.87.102.88/api/auth/"
 
 
@@ -90,16 +64,7 @@ async function authentification(email, password) {
 }
 
 async function getTypeOfUser(id, token) {
-    let url = `http://194.87.102.88/api/users/${id}`;
-
-
-    alert(`Get type: ${id} ${token}`);
-
-    // const data = {
-    //     id: id
-    // }
-
-    const json = JSON.stringify(data);
+    let url = `http://194.87.102.88/api/users/${id}/`;
 
     let response = await fetch(url, {
         method: 'GET',
@@ -109,9 +74,18 @@ async function getTypeOfUser(id, token) {
             }
     });
 
-    let text = await response.json();
 
-    return text
+    let text = await response.json();
+    let userTypes = ["is_student", "is_trainer", "is_manager"];
+    var userType = "undefined_type";
+
+    userTypes.forEach(type => {
+        if (Boolean(text[type]) == true) {
+            userType = type;
+        }
+    });
+
+    return userType;
 }
 
 

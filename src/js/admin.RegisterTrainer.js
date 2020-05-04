@@ -95,36 +95,41 @@ function addEventHandler() {
 
 
 async function registerTrainer() {
-    const url = `http://194.87.102.88/api/register/`
-    //
+    const url = `http://194.87.102.88/api/users`;
+
     const data = {
         first_name: document.getElementById("firstName").value,
         last_name: document.getElementById("lastName").value,
         email: document.getElementById("email").value,
-        password: document.getElementById("password").value
+        password: document.getElementById("password").value,
+        is_student: false,
+        is_manager: false,
+        is_trainer: true
     }
 
     if (data.first_name && data.last_name && data.email && data.password) {
-        const json = JSON.stringify(data);
 
         let response = await fetch(url, {
+
             method: 'POST',
             body: JSON.stringify(data),
             headers:
                 {
+                    'Authorization': `Token ${
+                        window.localStorage.getItem('token')}`,
                     "Content-type": "application/json; charset=UTF-8"
                 }
         });
 
-        let text = await response.text()
 
+        let text = await response.json();
+        let result = response.ok
 
-        alert(
-            `${text}`
-        )
+        alert('Result: ' + text + result)
 
     } else {
-        alert(`Please, fill all fields`)
+        alert(`
+                    Please, fill all fields`)
         return
     }
 }
