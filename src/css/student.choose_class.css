@@ -87,6 +87,30 @@ nav ul li a:active, nav ul li a:hover{
 
 }
 
+.card_tr {
+	outline: none;
+	border-radius: 15px;
+    border: 1px solid #AAAAAA;
+
+    width: 500px;
+    height: 70px;
+
+    background: none;
+    padding: 0px;
+    font-size: 16px;
+
+	background-image: linear-gradient(to right, white, #ccdbbd);
+
+    margin: 10px;
+    transition: 0.3s;
+    position: relative;
+
+
+    color: #000;
+
+    background-size: 200%;
+}
+
 .btn {
 	width: 80px;
     height: 80px;
@@ -137,6 +161,11 @@ nav ul li a:active, nav ul li a:hover{
     margin-left: 27%;
 }
 
+.list_tr {
+	float: left;
+    margin-left: 30%;
+}
+
 .title {
     width: 600px;
 
@@ -152,6 +181,8 @@ nav ul li a:active, nav ul li a:hover{
 	margin-left: 27.5%;
 	margin-top: 3%;
 }
+
+
 
 .schedule {
 	margin-top: 5%;

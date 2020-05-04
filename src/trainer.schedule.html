@@ -4,17 +4,31 @@
 	<meta charset="utf-8">
 	<title>Schedule</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/students.schedule.css">
+	
+	<link rel="stylesheet" type="text/css" href="css/student.choose_class.css">
+	<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
 	<nav>
-		<label class="logo">Schedule </label>
+		<label class="logo">SC Innopolis</label>
 		<ul>
-            <li><a href="trainer.html">Home</a></li>
-            <li><a href="login.html">Log out</a></li>
+			<li><a class="active" href="trainer.html">Home</a></li>
+			<li><a href="login.html">Log out</a></li>
 		</ul>
 	</nav>
 	<img class="wave" src="img/wave.png" width="110%">
-    <img class="schedule" src="img/schedule.png">
+
+	<div id="root"></div>
+
+	<!--<div class="app">
+	
+	</div>-->
+
+<script type="text/babel" src="js/trainer_schedule.js"></script> 
+
 </body>
 </html>
