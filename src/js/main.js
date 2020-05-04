@@ -28,6 +28,9 @@ document.getElementById('login_btn').onclick = async function validation() {
 
     let typeOfUser = await getTypeOfUser(id, token)
 
+    window.localStorage.setItem('id', id);
+    window.localStorage.setItem('token', token);
+
     switch (typeOfUser) {
         case "is_student":
             window.location.href = 'student.html';
