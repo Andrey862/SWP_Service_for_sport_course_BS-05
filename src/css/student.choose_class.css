@@ -182,7 +182,21 @@ nav ul li a:active, nav ul li a:hover{
 	margin-top: 3%;
 }
 
+.title4 {
+	width: 760px;
 
+    border: 1px solid #AAAAAA;
+    border-radius: 15px;
+    padding: 16px 20px;
+
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #83aa6b;
+	margin-left: 25.1%;
+	margin-top: 3%;
+}
 
 .schedule {
 	margin-top: 5%;

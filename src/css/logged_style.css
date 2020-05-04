@@ -158,7 +158,7 @@ a {
 
 table.my_table {
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 0px;
     text-align: left;
     position: absolute;
     top: 20%;
@@ -245,7 +245,7 @@ table.my_table {
 
 table.h_table {
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 0px;
     text-align: left;
     position: absolute;
     top: 30%;
