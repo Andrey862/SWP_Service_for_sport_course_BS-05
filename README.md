@@ -1,10 +1,10 @@
 # Software Project course, Spring 2020, Innopolis University
 
 **Team:**
-[Alisa Martyanova](https://github.com/AlisaMartyanova) 
-[Bekzhan Talgat](https://github.com/Beka-13)
-[Vadim Stepanov](https://github.com/vadimkerr/)
-[Andrey Feygelman](https://github.com/Andrey862)
+[Alisa Martyanova](https://github.com/AlisaMartyanova), 
+[Bekzhan Talgat](https://github.com/Beka-13),
+[Vadim Stepanov](https://github.com/vadimkerr/),
+[Andrey Feygelman](https://github.com/Andrey862),
 [Ivan Abramov](https://github.com/TopIvanAbramov)
 
 
