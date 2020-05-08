@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    font-family: 'padding', sans-serif;
 }
 
 * {
@@ -70,6 +71,7 @@ a {
     background: #83aa6b;
 }
 
+
 .container1 {
     text-align: center;
     margin-top: 100px;
@@ -98,7 +100,7 @@ a {
     color: white;
     text-transform: uppercase;
 
-    opacity: 0.7;
+    opacity: 0.85;
     background-size: 80%;
     background-position: center;
 
@@ -186,7 +188,7 @@ table.my_table {
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
     width: 740px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
     border-radius: 10px;
 }
@@ -203,7 +205,7 @@ table.my_table {
     text-align: center;
     border: 1px solid #AAAAAA;
     padding: 5px 5px;
-    font-size: 12px;
+    font-size: 15px;
     font-family: 'Poppins', sans-serif;
     border-radius: 10px;
 }
@@ -302,7 +304,7 @@ table.h_table {
     border: 1px solid #AAAAAA;
     padding: 1px 10px;
     width: 30px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
     border-radius: 10px;
 }
@@ -316,7 +318,7 @@ table.h_table {
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
     width: 740px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
     border-radius: 10px;
     word-spacing: 310px;
@@ -328,7 +330,7 @@ table.h_table {
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
     width: 200px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
     border-radius: 10px;
     word-spacing: 310px;
@@ -339,7 +341,7 @@ table.h_table {
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
     width: 740px;
-    font-size: 14px;
+    font-size: 16px;
     font-family: 'Poppins', sans-serif;
     word-spacing: 310px;
     cursor: pointer;
