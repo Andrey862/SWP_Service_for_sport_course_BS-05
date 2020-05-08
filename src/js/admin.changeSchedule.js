@@ -17,12 +17,17 @@ function Course(props) {
             </div>
 
 
-            <div className="container3">
-                <div>
-                    <h3>New Schedule</h3>
-                    <input className="input" type="text" id={"schedule" + props.course.id}/>
-                </div>
-            </div>
+			<div className="input-div five">
+				<div className="i">
+					<i className="fa fa-calendar"></i>
+				</div>
+				<div>
+					<h5>New schedule</h5>
+					<input className="input" type="text" id={"schedule" + props.course.id}/>
+				</div>
+			</div>
+
+           
         </div>
     )
 }
@@ -55,34 +60,55 @@ class App extends React.Component {
 
                 <div className="container6">
 
-                    <div className="title2">
-                        <h2> Create group </h2>
-                    </div>
+          
+					 <div className="login-container">
+						<form action="login.html">
+							<div>
+								<h2>Create group</h2>
+							</div>
+							<div className="input-div one">
+								<div className="i">
+									<i className="fas fa-dumbbell"></i>
+								</div>
+								<div>
+									<h5>Class name</h5>
+									<input className="input" type="text" id="className"/>
+								</div>
+							</div>
+							<div className="input-div two">
+								<div className="i">
+									<i className="fas fa-user"></i>
+								</div>
+								<div>
+									<h5>Trainer name</h5>
+									<input className="input" type="text" id="trainerName"/>
+								</div>
+							</div>
+							<div className="input-div three">
+								<div className="i">
+									<i className="fas fa-user"></i>
+								</div>
+								<div>
+									<h5>Trainer surname</h5>
+									<input className="input" type="text" id="trainerSurname"/>
+								</div>
+							</div>
+							<div className="input-div four">
+								<div className="i">
+									<i className="fa fa-calendar"></i>
+								</div>
+								<div>
+									<h5>Schedule</h5>
+									<input className="input" type="text" id="schedule"/>
+								</div>
+							</div>
+							<div className="btn" id="CreateGroup">Create</div>
+						</form>
+					</div>
 
-                    <div className="card2">
+                   
 
-
-                        <div className="container7">
-
-                            <h3>Class name</h3>
-                            <input className="input" type="text" id="className"/>
-
-                            <h3>Trainer name</h3>
-                            <input className="input" type="text" id="trainerName"/>
-
-                            <h3>Trainer surname</h3>
-                            <input className="input" type="text" id="trainerSurname"/>
-
-                            <h3>Schedule</h3>
-                            <input className="input" type="text" id="schedule"/>
-
-                        </div>
-
-                        <div className="container8">
-                            <button className="btn" id="CreateGroup"><a>Create</a></button>
-                        </div>
-
-                    </div>
+                   
 
                 </div>
             </div>
@@ -90,6 +116,8 @@ class App extends React.Component {
         )
     }
 }
+
+
 
 
 function getAllCourses() {
@@ -281,4 +309,21 @@ ReactDOM.render(<App/>, document.getElementById('root'))
 addEventHandler()
 
 
+const inputs = document.querySelectorAll('.input');
 
+function focusFunc() {
+    let parent = this.parentNode.parentNode;
+    parent.classList.add('focus');
+}
+
+function blurFunc() {
+    let parent = this.parentNode.parentNode;
+    if (this.value == "") {
+        parent.classList.remove('focus');
+    }
+}
+
+inputs.forEach(input => {
+    input.addEventListener('focus', focusFunc);
+    input.addEventListener('blur', blurFunc);
+});
