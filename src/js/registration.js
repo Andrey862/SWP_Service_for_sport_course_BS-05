@@ -23,6 +23,12 @@ document.getElementById('signup_btn').onclick = async function validation() {
     var lname = document.getElementById('last_name').value;
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+    var password_conf = document.getElementById('password_conf').value;
+
+    if (password != password_conf) {
+        alert("Passwords do not match!\nPlease, try again.");
+        return 0;
+    }
 
     let result = await registerStudent(fname, lname, email, password)
 

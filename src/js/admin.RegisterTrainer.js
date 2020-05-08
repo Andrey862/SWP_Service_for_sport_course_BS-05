@@ -38,7 +38,13 @@ async function registerTrainer() {
         last_name: document.getElementById("lastName").value,
         email: document.getElementById("email").value,
         password: document.getElementById("password").value,
+        password_conf : document.getElementById("password_conf").value,
         is_trainer: true
+    }
+
+    if (password.value != password_conf.value) {
+        alert("Passwords do not match!\nPlease, try again.");
+        return 0;
     }
 
     registerStudent(data.first_name, data.last_name, data.email, data.password)
