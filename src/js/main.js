@@ -26,6 +26,8 @@ document.getElementById('login_btn').onclick = async function validation() {
     let id = data['id']
     let token = data['token']
 
+	if (!token){alert('Invalid email or password')}
+
     let typeOfUser = await getTypeOfUser(id, token)
 
     window.localStorage.setItem('id', id);
