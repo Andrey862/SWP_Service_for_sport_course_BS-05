@@ -60,7 +60,7 @@ nav ul li a {
 }
 
 .container {
-	margin-top:2%;
+	margin-top: 2%;
     width: 100%;
     height: 90%;
     display: grid;
@@ -262,58 +262,67 @@ a:hover {
 	margin-top:-1%;
 }
 
+
+
+
+
 .title {
-	width: 796px;
-	height: 55px;
+    width: 600px;
+    height: 55px;
 
     border: 1px solid #AAAAAA;
     border-radius: 15px;
-    padding: 16px 20px;
+    padding-top: 16px;
 
     color: white;
-    text-transform: uppercase;
+    /*text-transform: uppercase;*/
     font-family: 'Poppins', sans-serif;
 
     background-color: #83aa6b;
-	margin-left: 6%;
-	margin-top: 1%;
+    margin-left: 6%;
+    margin-top: 20%;
 }
 
-table.table_trainer{
-	overflow: hidden;
-    border-radius: 10px;
-    text-align: left;
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    margin-left: 0%;
-    transform: translate(-90%, 0px);
+table {
+    margin-top: 20px;
 }
 
 .info{
     border: 1px solid #AAAAAA;
-    padding: 5px 16px;
-    width: 740px;
+    padding: 2px 16px;
+    width: 300px;
+
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    word-spacing: 310px;
     cursor: pointer;
+
+    border-radius: 10px;
 }
 
 .name {
-    width: 800px;
+    width: 600px;
     border: 1px solid #AAAAAA;
     
-    padding-top: 15px;
-    padding-bottom: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     padding-left: 20px;
+
     color: white;
-    /*text-transform: uppercase;*/
+    text-align: left;
+    text-transform: uppercase;
     font-family: 'Poppins', sans-serif;
+
     background-color: #83aa6b;
-    word-spacing: 322px;
+    border-radius: 10px;
+    word-spacing: 170px;
+    
 }
 
+.info:hover, .name:hover{
+    background-color: #83aa6b !important;
+    color: white;
+    transition: .3s;
+}
 /*nav ul li a:active, nav ul li a:hover {*/
 /*    height: 34px;*/
 /*	background: #9bba88;*/

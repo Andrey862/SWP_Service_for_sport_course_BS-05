@@ -118,9 +118,9 @@ function show_trainers(){
 	
 	var table = document.getElementById("table_trainer");
 	var row = table.insertRow(table.rows.length);
-	var cell = row.insertCell(0).outerHTML = "<th class='name'>" + "Name" + "</th>";
-	var cell = row.insertCell(1).outerHTML = "<th class='name'>" + "Surname" + "</th>";
-	var cell = row.insertCell(2).outerHTML = "<th class='name'>" + "Email" + "</th>";
+	var cell = row.insertCell(0).outerHTML = "<th class='name' colspan='2'>" + "Name_Surname Email"  + "</th>";
+	// var cell = row.insertCell(1).outerHTML = "<th class='name'>" + "Surname" + "</th>";
+	// var cell = row.insertCell(1).outerHTML = "<th class='name'>" + "Email" + "</th>";
 	
 	const url = "http://194.87.102.88/api/users/?is_trainer=true"
 	
@@ -138,9 +138,11 @@ function show_trainers(){
 			
 		var row = table.insertRow(table.rows.length);
 		
-		var cell = row.insertCell(0).outerHTML = "<td class='info'>"  + st['first_name']  + "</td>";
-		var cell = row.insertCell(1).outerHTML = "<td class='info'>"  + st['last_name'] + "</td>";
-		var cell = row.insertCell(2).outerHTML = "<td class='info'>"  +  st['email']  + "</td>";
+        inf = st['first_name'] + " " + st['last_name'];
+
+		var cell = row.insertCell(0).outerHTML = "<td class='info'>"  +  inf + "</td>";
+		// var cell = row.insertCell(1).outerHTML = "<td class='info'>"  +  + "</td>";
+		var cell = row.insertCell(1).outerHTML = "<td class='info'>" + st['email']  + "</td>";
 
     })
 	
