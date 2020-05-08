@@ -23,16 +23,14 @@ inputs.forEach(input => {
 
 //function add event handler on buttons clicks
 function addEventHandler() {
+	show_trainers()
     document.getElementById("signup_btn").onclick = registerTrainer
 }
 
 
 async function registerTrainer() {
 
-    // const url = `http://194.87.102.88/api/users`;
-    //
-
-
+  
     const data = {
         first_name: document.getElementById("firstName").value,
         last_name: document.getElementById("lastName").value,
@@ -48,35 +46,7 @@ async function registerTrainer() {
     }
 
     registerStudent(data.first_name, data.last_name, data.email, data.password)
-    // changestudentToTrainer()
-    //
-    //
-    // if (data.first_name && data.last_name && data.email && data.password) {
-    //
-    //     alert("Token: " + token +  " " + current)
-    //
-    //     let response = await fetch(url, {
-    //
-    //         method: 'POST',
-    //         body: JSON.stringify(data),
-    //         headers:
-    //             {
-    //                 'Authorization': `Token ${token}`,
-    //                 "Content-type": "application/json; charset=UTF-8"
-    //             }
-    //     });
-    //
-    //
-    //     let text = await response.json();
-    //     let result = response.ok
-    //
-    //     alert('Result: ' + text + result)
-    //
-    // } else {
-    //     // alert(`
-    //     //             Please, fill all fields`)
-    //     return
-    // }
+    
 }
 
 async function registerStudent(first_name, last_name, email, password) {
@@ -142,6 +112,38 @@ function changestudentToTrainer(id) {
                 alert("Error during changing")
             }
         })
+}
+
+function show_trainers(){
+	
+	var table = document.getElementById("table_trainer");
+	var row = table.insertRow(table.rows.length);
+	var cell = row.insertCell(0).outerHTML = "<th class='name'>" + "Name" + "</th>";
+	var cell = row.insertCell(1).outerHTML = "<th class='name'>" + "Surname" + "</th>";
+	var cell = row.insertCell(2).outerHTML = "<th class='name'>" + "Email" + "</th>";
+	
+	const url = "http://194.87.102.88/api/users/?is_trainer=true"
+	
+    // Create a request variable and assign a new XMLHttpRequest object to it.
+    const request = new XMLHttpRequest()
+	
+    // Open a new connection, using the GET request on the URL endpoint
+    request.open('GET', url, false)
+	request.setRequestHeader('Authorization', `Token ${token}`)
+    // Send request
+    request.send()
+
+    JSON.parse(request.responseText).forEach(st => {
+			 
+			
+		var row = table.insertRow(table.rows.length);
+		
+		var cell = row.insertCell(0).outerHTML = "<td class='info'>"  + st['first_name']  + "</td>";
+		var cell = row.insertCell(1).outerHTML = "<td class='info'>"  + st['last_name'] + "</td>";
+		var cell = row.insertCell(2).outerHTML = "<td class='info'>"  +  st['email']  + "</td>";
+
+    })
+	
 }
 
 addEventHandler()

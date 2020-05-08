@@ -71,6 +71,22 @@ a {
     background: #83aa6b;
 }
 
+.title {
+	width: 796px;
+	height: 55px;
+
+    border: 1px solid #AAAAAA;
+    border-radius: 15px;
+    padding: 16px 20px;
+
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #83aa6b;
+	margin-left: 6%;
+	margin-top: 1%;
+}
 
 .container1 {
     text-align: center;
@@ -81,6 +97,7 @@ a {
     text-align: center;
     margin-top: 10px
 }
+
 
 .btn {
     outline: none;
@@ -167,6 +184,8 @@ table.my_table {
     left: 50%;
     transform: translate(-50%, 0px);
 }
+
+
 
 .group {
     width: 800px;

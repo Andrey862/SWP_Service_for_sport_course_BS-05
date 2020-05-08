@@ -257,6 +257,63 @@ a:hover {
     }
 }
 
+.title h2{
+	text-align: center;
+	margin-top:-1%;
+}
+
+.title {
+	width: 796px;
+	height: 55px;
+
+    border: 1px solid #AAAAAA;
+    border-radius: 15px;
+    padding: 16px 20px;
+
+    color: white;
+    text-transform: uppercase;
+    font-family: 'Poppins', sans-serif;
+
+    background-color: #83aa6b;
+	margin-left: 6%;
+	margin-top: 1%;
+}
+
+table.table_trainer{
+	overflow: hidden;
+    border-radius: 10px;
+    text-align: left;
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    margin-left: 0%;
+    transform: translate(-90%, 0px);
+}
+
+.info{
+    border: 1px solid #AAAAAA;
+    padding: 5px 16px;
+    width: 740px;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    word-spacing: 310px;
+    cursor: pointer;
+}
+
+.name {
+    width: 800px;
+    border: 1px solid #AAAAAA;
+    
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    color: white;
+    /*text-transform: uppercase;*/
+    font-family: 'Poppins', sans-serif;
+    background-color: #83aa6b;
+    word-spacing: 322px;
+}
+
 /*nav ul li a:active, nav ul li a:hover {*/
 /*    height: 34px;*/
 /*	background: #9bba88;*/
