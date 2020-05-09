@@ -1,9 +1,9 @@
 let current = window.localStorage.getItem('id');
 let token = window.localStorage.getItem('token');
 var tmp = 0;
-std_hh = {};
-std_fh = {};
-std_fn = {};
+
+var std_fh = {};
+var std_fn = {};
 
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -80,13 +80,13 @@ async function show_students(arr_url) {
     let data = await res.json();
 
     for (var i = 0; i < data.length; i++) {
-        if (!std_hh.hasOwnProperty(data[i]['student'])) {
-            std_hh[data[i]['student']] = 0;
+        if (!std_fh.hasOwnProperty(data[i]['student'])) {
+            // std_hh[data[i]['student']] = 0;
             std_fh[data[i]['student']] = 0;
         }
-        if (today == data[i]['date']) {
-            std_hh[data[i]['student']] += data[i]['hours'];
-        }
+        // if (today == data[i]['date']) {
+        //     std_hh[data[i]['student']] += data[i]['hours'];
+        // }
         std_fh[data[i]['student']] += data[i]['hours'];
     }
 
@@ -112,7 +112,6 @@ async function do_fetch(urrl) {
     let std = data['students'];
     for (var j = 0; j < std.length; j++) {
         var full_name = std[j]['first_name'] + " " + std[j]['last_name'];
-        std_hh[String(std[j]['id'])] = 0;
         std_fn[String(std[j]['id'])] = full_name;
 
         inf =  "<span class='fname'>" + full_name + "</span>" + "<span class='fhours'>{0} hours</span>".format(String(std_fh[std[j]['id']]));
@@ -128,8 +127,25 @@ async function do_fetch(urrl) {
     return 1;
 }
 
-function add_hour(hh, id) {
-    // console.log('beka');
+async function add_hour(hh, id) {
+    let std_hh = {};
+    let res = await fetch('http://194.87.102.88/api/hours/', {
+        headers:
+            {
+                "Content-type": "application/json; charset=UTF-8",
+                'Authorization': `Token ${token}`
+            }
+    });
+    let data1 = await res.json();
+
+    for (var i = 0; i < data1.length; i++) {
+        if (!std_hh.hasOwnProperty(data1[i]['student'])) {
+            std_hh[data1[i]['student']] = 0;
+        }
+        if (today == data1[i]['date']) {
+            std_hh[data1[i]['student']] += data1[i]['hours'];
+        }
+    }
 
     if (std_hh[id] + hh > 3) {
         alert('You cannot add more than 3 hours per day')
