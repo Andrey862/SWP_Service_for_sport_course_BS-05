@@ -269,9 +269,9 @@ table.h_table {
     border-radius: 10px;
     text-align: left;
     position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, 0px);
+    margin-top: 3%;
+    margin-left: 20%;
+    /*transform: translate(-50%, 0px);*/
 }
 
 
@@ -316,7 +316,8 @@ table.h_table {
     /*text-transform: uppercase;*/
     font-family: 'Poppins', sans-serif;
     background-color: #83aa6b;
-    word-spacing: 322px;
+    word-spacing: 100px;
+    border-radius: 10px;
 }
 
 .hour{
@@ -359,11 +360,12 @@ table.h_table {
 .info{
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
-    width: 740px;
+    width: 200px;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
-    word-spacing: 310px;
+    word-spacing: 1px;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 .date :hover{
@@ -377,4 +379,11 @@ table.h_table {
 }
 .fhours{
     float: right;
+    position: relative;
+    right: 10%;
+}
+.email {
+    float: left;
+    position: relative;
+    left: 7%;
 }
