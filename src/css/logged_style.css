@@ -206,7 +206,7 @@ table.my_table {
 .student {
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
-    width: 740px;
+    width: 720px;
     font-size: 16px;
     font-family: 'Poppins', sans-serif;
     border-radius: 10px;
@@ -219,7 +219,7 @@ table.my_table {
 }
 
 .btn_add {
-    width: 60px;
+    width: 70px;
 
     text-align: center;
     border: 1px solid #AAAAAA;
@@ -370,4 +370,11 @@ table.h_table {
     background-color: #83aa6b !important;
     color: white;
     transition: .3s;
+}
+
+.fname {
+    float: left;
+}
+.fhours{
+    float: right;
 }

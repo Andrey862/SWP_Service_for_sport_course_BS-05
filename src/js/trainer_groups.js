@@ -2,6 +2,7 @@ let current = window.localStorage.getItem('id');
 let token = window.localStorage.getItem('token');
 var tmp = 0;
 std_hh = {};
+std_fh = {};
 std_fn = {};
 
 var today = new Date();
@@ -48,35 +49,56 @@ String.prototype.format = function () {
     return a
 }
 
-function get_data() {
-    fetch('http://194.87.102.88/api/hours/', {
+// function get_data() {
+//     fetch('http://194.87.102.88/api/hours/', {
+//         headers:
+//             {
+//                 "Content-type": "application/json; charset=UTF-8",
+//                 'Authorization': `Token ${token}`
+//             }
+//     })
+//         .then(function (resp) {
+//             return resp.json();
+//         })
+//         .then(function (data) {
+//             for (var i = 0; i < data.length; i++) {
+//                 if (today == data[i]['date']) {
+//                     std_hh[data[i]['student']] += data[i]['hours'];
+//                 }
+//             }
+//         });
+// }
+
+async function show_students(arr_url) {
+    let res = await fetch('http://194.87.102.88/api/hours/', {
         headers:
             {
                 "Content-type": "application/json; charset=UTF-8",
                 'Authorization': `Token ${token}`
             }
-    })
-        .then(function (resp) {
-            return resp.json();
-        })
-        .then(function (data) {
-            for (var i = 0; i < data.length; i++) {
-                if (today == data[i]['date']) {
-                    std_hh[data[i]['student']] += data[i]['hours'];
-                }
-            }
-        });
-}
+    });
+    let data = await res.json();
 
-async function show_students(arr_url) {
+    for (var i = 0; i < data.length; i++) {
+        if (!std_hh.hasOwnProperty(data[i]['student'])) {
+            std_hh[data[i]['student']] = 0;
+            std_fh[data[i]['student']] = 0;
+        }
+        if (today == data[i]['date']) {
+            std_hh[data[i]['student']] += data[i]['hours'];
+        }
+        std_fh[data[i]['student']] += data[i]['hours'];
+    }
+
     for (var i = 0; i < arr_url.length; i++) {
         const url = arr_url[i];
         let res = await do_fetch(url);
     }
-    get_data();
+    // get_data();
 }
 
 async function do_fetch(urrl) {
+    // console.log( "asd" );
     let res = await fetch(urrl, {
         headers:
             {
@@ -93,9 +115,11 @@ async function do_fetch(urrl) {
         std_hh[String(std[j]['id'])] = 0;
         std_fn[String(std[j]['id'])] = full_name;
 
+        inf =  "<span class='fname'>" + full_name + "</span>" + "<span class='fhours'>{0} hours</span>".format(String(std_fh[std[j]['id']]));
         var row1 = table.insertRow(table.rows.length - tmp);
-        var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
-        var cell1 = row1.insertCell(1).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(1, {0});'>".format(std[j]['id']) + "1 hours" + "</td>";
+        // var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
+        var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + inf + "</td>";
+        var cell1 = row1.insertCell(1).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(1, {0});'>".format(std[j]['id']) + "1 hour" + "</td>";
         var cell1 = row1.insertCell(2).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(2, {0});'>".format(std[j]['id']) + "2 hours" + "</td>";
         var cell1 = row1.insertCell(3).outerHTML = "<td type='button' class='btn_add' onclick='add_hour(3, {0});'>".format(std[j]['id']) + "3 hours" + "</td>";
     }
