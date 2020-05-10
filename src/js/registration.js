@@ -24,6 +24,8 @@ document.getElementById('signup_btn').onclick = async function validation() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var password_conf = document.getElementById('password_conf').value;
+    
+   // email_validation(email)
 
     if (password != password_conf) {
         alert("Passwords do not match!\nPlease, try again.");
@@ -76,3 +78,13 @@ async function registerStudent(first_name, last_name, email, password) {
         return false
     }
 }
+
+/*function email_validation(email){
+	
+	var pattern = /^[a-z]{1,1}\.[a-z]+@[innopolis]\.[university]$/
+	
+	if (email.search(pattern) == 0){
+		alert('Invalid form of email'
+		return 0;
+	}
+}*/

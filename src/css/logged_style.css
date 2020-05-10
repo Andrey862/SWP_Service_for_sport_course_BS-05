@@ -264,7 +264,8 @@ table.my_table {
 }
 
 
-table.h_table {
+table.h_table_list {
+	
     overflow: hidden;
     border-radius: 10px;
     text-align: left;
@@ -274,6 +275,26 @@ table.h_table {
     /*transform: translate(-50%, 0px);*/
 }
 
+table.h_table {
+	width:40%;
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: left;
+    position: absolute;
+    margin-top: 3%;
+    margin-left: 30%;
+    /*transform: translate(-50%, 0px);*/
+}
+
+table.h_table_stat {
+    overflow: hidden;
+    border-radius: 10px;
+    text-align: left;
+    position: absolute;
+    margin-top: 10%;
+    margin-left: 25%;
+    /*transform: translate(-50%, 0px);*/
+}
 
 .hours {
     width: 800px;

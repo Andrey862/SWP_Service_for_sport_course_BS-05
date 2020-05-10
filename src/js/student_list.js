@@ -41,12 +41,12 @@ async function show_students(){
         }
 			
 		var row = table.insertRow(table.rows.length);
-		var fname = "<span class='fname'>" + st['first_name'] + " " + st['first_name'] + "</span> "
+		var fname = "<span class='fname'>" + st['first_name'] + " " + st['last_name'] + "</span> "
 		fname += "<span class='fhours'>" + std_fh[st['id']] + " hours</span> ";
 		
 		var cell = row.insertCell(0).outerHTML = "<td class='info'>"  + fname + "</td>";
 		// var cell = row.insertCell(0).outerHTML = "<td class='info'>"  + st['first_name']  + "</td>";
-		// var cell = row.insertCell(1).outerHTML = "<td class='info'>"  + st['first_name']+ "</td>";
+		// var cell = row.insertCell(1).outerHTML = "<td class='info'>"  + st['last_name']+ "</td>";
 		var cell = row.insertCell(1).outerHTML = "<td class='info'>"  + "<span class='email'>" + st['email']  + "</span> </td>";
 
     })

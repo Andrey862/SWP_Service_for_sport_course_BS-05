@@ -83,6 +83,7 @@ nav ul li a {
     display: flex;
     align-items: center;
     text-align: center;
+    margin-left: 15%;
 }
 
 form {
@@ -267,7 +268,7 @@ a:hover {
 
 
 .title {
-    width: 600px;
+    width: 672px;
     height: 55px;
 
     border: 1px solid #AAAAAA;
@@ -279,21 +280,32 @@ a:hover {
     font-family: 'Poppins', sans-serif;
 
     background-color: #83aa6b;
-    margin-left: 6%;
-    margin-top: 20%;
+    margin-left: 11%;
+    margin-top: 0%;
 }
 
-table {
-    margin-top: 20px;
+table.table_trainer{
+	overflow: hidden;
+    border-radius: 10px;
+    text-align: left;
+    position: absolute;
+    top: 25%;
+    left: 45%;
+    margin-left: 0%;
+    transform: translate(-90%, 0px);
+    font-size: 16px;
 }
 
 .info{
+
+	
     border: 1px solid #AAAAAA;
     padding: 2px 16px;
     width: 300px;
 
     font-size: 16px;
-    font-family: 'Poppins', sans-serif;
+    font-weight: normal;
+
     cursor: pointer;
 
     border-radius: 10px;
@@ -311,10 +323,10 @@ table {
     text-align: left;
     text-transform: uppercase;
     font-family: 'Poppins', sans-serif;
-
+	font-size: 16px;
     background-color: #83aa6b;
     border-radius: 10px;
-    word-spacing: 170px;
+    word-spacing: 190px;
     
 }
 
