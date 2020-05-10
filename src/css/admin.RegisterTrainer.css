@@ -59,8 +59,9 @@ nav ul li a {
 }
 
 .container {
-	margin-top: 0%;
-    width: 100%;
+	margin-top: 2%;
+	margin-left: 5%;
+    width: 90%;
     height: 90%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -87,6 +88,7 @@ nav ul li a {
 
 form {
     width: 360px;
+    margin-left:10%;
 
 }
 
@@ -99,6 +101,7 @@ form h2 {
     text-transform: uppercase;
     margin: 15px 0;
     color: #333;
+	
 }
 
 .input-div {
@@ -217,7 +220,7 @@ a:hover {
 .btn:hover {
     background-position: right;
 }
-
+/*
 @media screen and (max-width: 1050px) {
     .container {
         grid-gap: 5rem;
@@ -255,7 +258,7 @@ a:hover {
     .login-container {
         justify-content: center;
     }
-}
+}*/
 
 .title h2{
 	text-align: center;
@@ -263,7 +266,7 @@ a:hover {
 }
 
 .title {
-    width: 600px;
+    width: 655px;
     height: 55px;
 
     border: 1px solid #AAAAAA;
@@ -276,7 +279,7 @@ a:hover {
 
     background-color: #83aa6b;
     margin-left: 10%;
-    margin-top: 20%;
+    margin-top: 2%;
 }
 
 .title2 {
@@ -330,4 +333,3 @@ table.table_trainer{
     color: white;
     transition: .3s;
 }
-
