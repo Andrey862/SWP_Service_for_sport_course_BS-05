@@ -265,11 +265,12 @@ table.my_table {
 
 
 table.h_table_list {
-	
     overflow: hidden;
     border-radius: 10px;
+
     text-align: left;
     position: absolute;
+
     margin-top: 3%;
     margin-left: 20%;
     /*transform: translate(-50%, 0px);*/
@@ -382,9 +383,11 @@ table.h_table_stat {
     border: 1px solid #AAAAAA;
     padding: 5px 16px;
     width: 200px;
+
     font-size: 16px;
+    font-weight: normal;
     font-family: 'Poppins', sans-serif;
-    word-spacing: 1px;
+
     cursor: pointer;
     border-radius: 10px;
 }
