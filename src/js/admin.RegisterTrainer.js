@@ -40,6 +40,11 @@ async function registerTrainer() {
         is_trainer: true
     }
 
+	if (!email_validation(email)){
+		alert('Invalid form of email');
+		return 0;
+	}
+
     if (password.value != password_conf.value) {
         alert("Passwords do not match!\nPlease, try again.");
         return 0;
@@ -145,6 +150,20 @@ function show_trainers(){
 		var cell = row.insertCell(1).outerHTML = "<td class='info'>" + st['email']  + "</td>";
 
     })
+	
+}
+
+function email_validation(email){
+	
+	regexp1 = new RegExp();
+	regexp2 = new RegExp();
+	
+	var regexp1 = /^[a-z]+\.[a-z]+@innopolis.university$/
+	var regexp2 = /^[a-z]+\.[a-z]+@innopolis.ru$/
+	
+	if (regexp1.test(email)){return true}
+	else if (regexp2.test(email)) {return true}
+	else {return false}
 	
 }
 
