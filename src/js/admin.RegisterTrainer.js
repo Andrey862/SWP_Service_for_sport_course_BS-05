@@ -40,7 +40,7 @@ async function registerTrainer() {
         is_trainer: true
     }
 
-	if (!email_validation(email)){
+	if (!email_validation(email.value)){
 		alert('Invalid form of email');
 		return 0;
 	}

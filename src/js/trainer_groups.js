@@ -90,6 +90,8 @@ async function show_students(arr_url) {
         std_fh[data[i]['student']] += data[i]['hours'];
     }
 
+	
+
     for (var i = 0; i < arr_url.length; i++) {
         const url = arr_url[i];
         let res = await do_fetch(url);
@@ -113,7 +115,8 @@ async function do_fetch(urrl) {
     for (var j = 0; j < std.length; j++) {
         var full_name = std[j]['first_name'] + " " + std[j]['last_name'];
         std_fn[String(std[j]['id'])] = full_name;
-
+		if (!std_fh[std[j]['id']]){std_fh[std[j]['id']] = '0'}
+		//alert(std_fh[std[j]['id']])
         inf =  "<span class='fname'>" + full_name + "</span>" + "<span class='fhours'>{0} hours</span>".format(String(std_fh[std[j]['id']]));
         var row1 = table.insertRow(table.rows.length - tmp);
         // var cell1 = row1.insertCell(0).outerHTML = "<td class='student'>" + full_name + "</td>";
